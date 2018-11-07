@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+
+# Print seconds since the epoch
+
+date +%s

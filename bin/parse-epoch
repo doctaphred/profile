@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# Print the seconds-since-epoch timestamp as an ISO 8601 time.
+
+require 'bigdecimal'
+
+ARGV.each do |t|
+    # `Time.strptime(t, "%s")` ignores fractional seconds
+   puts Time.at(BigDecimal.new(t)).strftime "%Y-%m-%dT%H:%M:%S.%3NZ"
+end

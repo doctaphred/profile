@@ -1,0 +1,207 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Print information about the current environment's Python executable.
+
+Works with Python 2 and 3, virtualenv, and direnv.
+
+
+macOS system Python:
+
+    $ pyinfo
+    🐍 2.7.10 (/usr/bin/python)
+
+    $ pyinfo --short
+    🐍 2.7.10 (usr)  # Uses the name of the 2nd directory up
+
+    $ pyinfo --mac  # Omits path if using default Mac Python
+    🐍 2.7.10
+
+    $ pyinfo --no-path
+    🐍 2.7.10
+
+    $ pyinfo --only-path
+    /usr/bin/python
+
+
+Homebrew-installed Python:
+
+    $ pyinfo
+    🐍 2.7.12 (/usr/local/opt/python/bin/python2.7)
+
+    $ pyinfo --short  # 3rd directory up has a better name than the 2nd
+    🐍 2.7.12 (opt)
+
+    $ pyinfo --brew  # Omits path if using Homebrew-installed Python
+    🐍 2.7.12
+
+
+virtualenv Python:
+
+    ~/dev/project$ pyinfo --brew --short
+    🐍 2.7.12
+
+    ~/dev/project$ source venv/bin/activate
+
+    (venv) ~/dev/project$ pyinfo
+    🐍 3.5.2 (/Users/me/project/venv/bin/python)
+
+    (venv) ~/dev/project$ pyinfo --brew --short
+    🐍 3.5.2 (project)
+
+    (venv) ~/dev/project$ deactivate
+
+    ~/dev/project$ pyinfo --brew --short
+    🐍 2.7.12
+
+
+direnv Python:
+
+    ~/dev$ pyinfo --brew --short
+    🐍 2.7.12
+
+    ~/dev$ cd project
+    direnv: loading .envrc
+    direnv: export +VIRTUAL_ENV ~PATH
+
+    ~/dev/project$ pyinfo
+    🐍 3.5.2 (/Users/me/dev/project/.direnv/python-3.5.2/bin/python)
+
+    ~/dev/project$ pyinfo --brew --short  # Uses directory above '.direnv'
+    🐍 3.5.2 (project)
+
+    ~/dev/project$ cd ..
+    direnv: unloading
+
+    ~/dev$ pyinfo --brew --short
+    🐍 2.7.12
+
+Note that the snake emojus may overlap the subsequent space character
+when rendered.
+
+"""
+import platform
+import re
+import sys
+from os.path import basename, dirname
+
+
+optional_version_pattern = r'(\d+(\.\d+(\.\d+)))?'
+
+homebrew_pattern = (
+    r'/usr/local/opt/python{0}/bin/python{0}'
+    .format(optional_version_pattern))
+
+mac_installer_pattern = (
+    r'/Library/Frameworks/Python.framework/Versions/{0}/bin'
+    .format(optional_version_pattern))
+
+
+def short_name(executable_path):
+    """
+    Example outputs for various Python executable locations:
+
+        usr:
+            /usr/bin/python
+
+        local:
+            /usr/local/bin/python
+            /usr/local/bin/python2
+            /usr/local/bin/python2.7
+            /usr/local/bin/python3
+            /usr/local/bin/python3.5
+
+        opt:
+            /usr/local/opt/python/bin/python2.7
+            /usr/local/opt/python3/bin/python3.5
+
+        standard-venv-project:
+            /Users/me/dev/standard-venv-project/venv/bin/python
+            /Users/me/dev/standard-venv-project/virtualenv/bin/python
+
+        external-venv:
+            /Users/me/.virtualenvs/external-venv/bin/python
+
+        custom-venv:
+            /Users/me/dev/project/custom-venv/bin/python
+
+        direnv-project:
+            /Users/me/dev/direnv-project/.direnv/python-3.5.2/bin/python
+    """
+    path = dirname(dirname(executable_path))
+    name = basename(path)
+    if name == 'venv' or name == 'virtualenv' or name.startswith('python'):
+        # Move up a level
+        path = dirname(path)
+        name = basename(path)
+        if name == '.direnv':
+            # Move up another level.
+            path = dirname(path)
+            name = basename(path)
+    return name
+
+
+def parse_argv(argv, **flags):
+    options = {flag: name
+               for name in flags
+               for flag in flags[name]}
+
+    args, opts = [], []
+    for arg in argv:
+        try:
+            opts.append(options[arg])
+        except KeyError:
+            args.append(arg)
+
+    return args, opts
+
+
+if __name__ == '__main__':
+
+    args, opts = parse_argv(
+        sys.argv,
+        # Print help text
+        help=['--help', '-h'],
+        # Replace the executable path with a short name
+        short_name=['--short-name', '--short', '--name'],
+        # Only print the path or short name
+        only_path=['--path', '--exe', '--only-path', '--path-only'],
+        # Don't print the path or short name
+        no_path=['--no-path', '--no-exe'],
+        # Omit the path or short name of Homebrew-installed Python
+        homebrew=['--homebrew', '--brew'],
+        # Omit the path or short name of Mac-installer-installed Python
+        mac_installer=['--mac', '--macos', '--osx'],
+    )
+
+    if 'help' in opts:
+        print('')
+        print('Prints information about the default Python executable.')
+        print('Handles Python 2 and 3, virtualenvs, and direnv.')
+        print('Here is the non-help output for your current environment:\n')
+
+    if 'homebrew' in opts:
+        args.append(homebrew_pattern)
+
+    if 'mac_installer' in opts:
+        args.append(mac_installer_pattern)
+
+    exe_path = sys.executable
+
+    if 'only_path' in opts:
+        output = exe_path
+    else:
+        output = '🐍 {}'.format(platform.python_version())
+
+        if 'no_path' in opts:
+            exe_info = None
+        elif any(re.match(pattern, exe_path) for pattern in args):
+            exe_info = None
+        elif 'short_name' in opts:
+            exe_info = short_name(exe_path)
+        else:
+            exe_info = exe_path
+
+        if exe_info is not None:
+            output += ' ({})'.format(exe_info)
+
+    print(output)

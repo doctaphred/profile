@@ -7,8 +7,8 @@ export PATH=~/.local/bin:$PATH
 # PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-# My personal executables (nonstandard location)
-export PATH=~/bin:$PATH
+# My personal executables (nonstandard locations)
+export PATH=~/bin:~/profile/bin:$PATH
 
 # Platform-specific executables (personal, nonstandard)
 # ex: ~/bin/"$(uname -s)"-"$(uname -m)" => ~/bin/Darwin-x86_64

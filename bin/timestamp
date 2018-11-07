@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# Print a ISO 8601 format UTC timestamp.
+#
+# ex: 2016-12-04T18:20:44.039Z
+
+# If GNU date is available, use `date -u +%FT%T.%3NZ`
+# or `date -u +%Y-%m-%dT%H:%M:%S.%3NZ` instead.
+
+puts Time.now.utc.strftime "%Y-%m-%dT%H:%M:%S.%3NZ"

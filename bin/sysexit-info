@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+"""Print some human-friendly information about the given status code.
+
+See http://tldp.org/LDP/abs/html/exitcodes.html
+"""
+import sys
+
+exit_code = int(sys.argv[1])
+
+if exit_code == 0:
+    # Process exited successfully;
+    # no additional info needed
+    sys.exit()
+
+messages = {
+    1: '[default error code]',
+    2: 'Error with shell builtin',
+    126: 'Cannot execute command. Do you need to `chmod a+x` it?',
+    127: 'Command not found. Is it on your $PATH? Did you make a typo?',
+    128: 'Invalid argument to exit',
+    255: 'Exit status out of range',
+}
+
+signames = {
+    1: 'SIGHUP',
+    2: 'SIGINT',
+    3: 'SIGQUIT',
+    4: 'SIGILL',
+    5: 'SIGTRAP',
+    6: 'SIGABRT',
+    7: 'SIGEMT',
+    8: 'SIGFPE',
+    9: 'SIGKILL',
+    10: 'SIGBUS',
+    11: 'SIGSEGV',
+    12: 'SIGSYS',
+    13: 'SIGPIPE',
+    14: 'SIGALRM',
+    15: 'SIGTERM',
+    16: 'SIGURG',
+    17: 'SIGSTOP',
+    18: 'SIGTSTP',
+    19: 'SIGCONT',
+    20: 'SIGCHLD',
+    21: 'SIGTTIN',
+    22: 'SIGTTOU',
+    23: 'SIGIO',
+    24: 'SIGXCPU',
+    25: 'SIGXFSZ',
+    26: 'SIGVTALRM',
+    27: 'SIGPROF',
+    28: 'SIGWINCH',
+    29: 'SIGINFO',
+    30: 'SIGUSR1',
+    31: 'SIGUSR2',
+}
+
+try:
+    message = messages[exit_code]
+except KeyError:
+    signum = exit_code - 128
+    try:
+        signame = signames[signum]
+    except KeyError:
+        message = 'Unknown error'
+    else:
+        message = 'Terminated by {} ({})'.format(signame, signum)
+
+RED = '\x1b[01;31m'
+RESET = '\x1b[0m'
+
+print('\n{}Error {}: {}{}'.format(RED, exit_code, message, RESET))

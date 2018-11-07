@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This doesn't work in a terminal,
+# but works here because this file is utf-8 encoded.
+# Use `printf "\u2603"` in a terminal.
+printf ☃
+
+# Other forms:
+# \xe2\x98\x83
+# &#9731;
+
+# See also unicodesnowmanforyou.com
