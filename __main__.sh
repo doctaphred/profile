@@ -5,6 +5,7 @@
 # Style guide: https://google.github.io/styleguide/shell.xml
 
 source ~/profile/options.sh
+source ~/profile/env.sh
 source ~/profile/aliases.sh
 source ~/profile/functions.sh
 source ~/profile/path.sh
