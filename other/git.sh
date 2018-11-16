@@ -35,12 +35,14 @@ alias gpuf='git push --force-with-lease'
 # Squash the previous N commits into the N+1th,
 # preserving and amending only the N+1th message.
 gsqn() {
+    # Git squash N
     git reset --soft HEAD~$1 && git commit --amend
 }
 
 alias gsq='gsqn 1'
 
 gri() {
+    # Git rebase interactive
     git rebase --interactive HEAD~$1
 }
 
@@ -71,15 +73,18 @@ gre() {
 }
 
 gcl() {
+    # Git clone
     git clone git@$1.git
 }
 
 ghcl() {
+    # GitHub clone
     git clone git@github.com:$1/$2.git
     cd $2
 }
 
 bbcl() {
+    # Bitbucket clone
     git clone git@bitbucket.com:$1/$2.git
     cd $2
 }
