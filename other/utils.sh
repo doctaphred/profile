@@ -87,3 +87,7 @@ port-scan() {
       (echo > /dev/tcp/$1/$port) 2>/dev/null && echo $1:$port is open
     done
 }
+
+openports() {
+    lsof -i -P -w -n | grep LISTEN
+}
