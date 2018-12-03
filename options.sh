@@ -36,7 +36,7 @@ export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -n; history -a; $PROMPT_COMMAND"
 
 export VISUAL='subl --new-window --wait'
 # TODO: rmate if remote and available
