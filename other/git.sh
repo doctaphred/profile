@@ -31,6 +31,10 @@ alias gp='git pull'
 alias gpr='git pull --rebase'
 alias gpu='git push --set-upstream'
 alias gpuf='git push --force-with-lease'
+alias gsu='git submodule update'
+alias gsui='git submodule update --init'
+alias gsuir='git submodule update --init --recursive'
+alias gg='git grep'
 
 # Squash the previous N commits into the N+1th,
 # preserving and amending only the N+1th message.
@@ -63,6 +67,10 @@ gl () {
     # %C(red): switch to red text
     # %<(16): add spaces on the right to fit the next % to 16 columns; truncate the right side
     git log --pretty=format:'%C(yellow)%h%C(reset) %C(green)%<(16,trunc)%an%C(reset) %C(magenta)%<(14)%cr%C(reset)%C(red)%d%C(reset) %s' $@
+}
+
+ggraph() {
+    git log --pretty=oneline --abbrev-commit --graph --decorate
 }
 
 alias glg='gl | ag'
