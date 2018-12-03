@@ -68,3 +68,8 @@ job() {
     # Start a background process, ignoring stdout and stderr
     $@ > /dev/null 2>&1 &
 }
+
+clean-shell() {
+    # Open a subshell without sourcing .bashrc or .bash_profile
+    env -i $SHELL --norc --noprofile
+}
