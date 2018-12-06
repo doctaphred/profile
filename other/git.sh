@@ -69,6 +69,11 @@ gl () {
     git log --pretty=format:'%C(yellow)%h%C(reset) %C(green)%<(16,trunc)%an%C(reset) %C(magenta)%<(14)%cr%C(reset)%C(red)%d%C(reset) %s' $@
 }
 
+gbdp() {
+    # "git branch delete previous"
+    git branch --delete @{-1}
+}
+
 ggraph() {
     git log --pretty=oneline --abbrev-commit --graph --decorate
 }
