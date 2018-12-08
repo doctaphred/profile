@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import sys
+
+words = sys.argv[1:]
+
+
+def backtick(word):
+    """
+    >>> backtick('ayy')
+    '`a` `y` `y`'
+    """
+    return ' '.join(f'`{letter}`' for letter in word)
+
+
+if __name__ == '__main__':
+    # main()
+    print('   '.join([backtick(word) for word in words]), end='')
