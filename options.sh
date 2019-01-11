@@ -20,14 +20,15 @@ set +h
 # cd by typing a directory's name
 shopt -s autocd
 
-# ls-after-cd, from http://pastebin.com/VBSQJyeA
+# ls-after-cd, inspired by http://pastebin.com/VBSQJyeA
 # Insert into PROMPT_COMMAND
-_ls_after_cd() {
-    [[ ${__new_wd:=$PWD} != $PWD ]] && ls
-    __new_wd=$PWD
+__prev_wd=$PWD
+_ls_new_wd() {
+    [[ $__prev_wd != $PWD ]] && ls
+    __prev_wd=$PWD
 }
 
-PROMPT_COMMAND="_ls_after_cd; $PROMPT_COMMAND"
+PROMPT_COMMAND="_ls_new_wd; $PROMPT_COMMAND"
 
 # Better history management, from http://unix.stackexchange.com/a/48113/134011
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
