@@ -71,6 +71,8 @@ job() {
 
 
 clean-shell() {
-    # Open a subshell without sourcing .bashrc or .bash_profile
-    env -i $SHELL --norc --noprofile
+    # Open a subshell without inheriting env vars (-i),
+    # and without sourcing .bashrc or .bash_profile.
+    # Set TERM=xterm because programs like less complain if you don't.
+    env -i TERM=xterm $SHELL --norc --noprofile
 }
