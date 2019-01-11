@@ -36,6 +36,20 @@ alias gsui='git submodule update --init'
 alias gsuir='git submodule update --init --recursive'
 alias gg='git grep'
 
+git-in() {
+    # Perform a git command in the given directory.
+    # (Assumes the git directory is `.git` within the work tree.)
+    dir=$1
+    shift
+    git --git-dir=$dir/.git --work-tree=$dir $@
+}
+
+git-name() {
+    # Print the symbolic name for the current commit
+    # (n.b. 'HEAD' works here even in detached ("gittotined") state)
+    git name-rev --always --name-only HEAD
+}
+
 # Squash the previous N commits into the N+1th,
 # preserving and amending only the N+1th message.
 gsqn() {
