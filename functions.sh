@@ -64,7 +64,7 @@ mergeout() {
 }
 
 
-job() {
+background() {
     # Start a background process, ignoring stdout and stderr
     $@ > /dev/null 2>&1 &
 }
