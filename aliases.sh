@@ -2,6 +2,7 @@ alias please=sudo  # Mind your manners!
 alias pseudo=sudo
 alias nuke='rm -rf'
 alias chmod-yolo='chmod 777'
+alias kj='kill %'  # Kill Job
 
 alias la='ls -A'
 alias ll='ls -lh'
