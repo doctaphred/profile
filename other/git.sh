@@ -28,6 +28,7 @@ alias gr='git reset'
 alias grs='git reset --soft'
 alias gf='git fetch'
 alias gp='git pull'
+# `git config --global rebase.autoStash true` makes this much nicer
 alias gpr='git pull --rebase'
 alias gpu='git push --set-upstream'
 alias gpuf='git push --force-with-lease'
@@ -35,6 +36,7 @@ alias gsu='git submodule update'
 alias gsui='git submodule update --init'
 alias gsuir='git submodule update --init --recursive'
 alias gg='git grep'
+alias grim='git rebase --interactive master'
 
 git-in() {
     # Perform a git command in the given directory.
