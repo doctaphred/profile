@@ -13,6 +13,9 @@
 # Cause a pipeline to produce a failure return code if any command errors.
 set -o pipefail
 
+# Stop accidentally closing shells with ctrl+d
+set -o ignoreeof
+
 # Disable caching, 'cause it sucks
 # https://twitter.com/doctaphred/status/721423180414480384
 set +h
