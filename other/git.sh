@@ -30,7 +30,7 @@ alias gf='git fetch'
 alias gp='git pull'
 # `git config --global rebase.autoStash true` makes this much nicer
 alias gpr='git pull --rebase'
-alias gpu='git push --set-upstream'
+alias gpu='git push'  # Remember to `git config --global push.default current`
 alias gpuf='git push --force-with-lease'
 alias gsu='git submodule update'
 alias gsui='git submodule update --init'
