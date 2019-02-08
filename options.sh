@@ -39,6 +39,8 @@ HISTSIZE=100000  # Size of history in memory
 HISTFILESIZE=100000  # Size of history file
 shopt -s histappend  # Append to history, don't overwrite it
 
+HISTTIMEFORMAT="%F %T "
+
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -n; history -a; $PROMPT_COMMAND"
 
