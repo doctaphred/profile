@@ -34,10 +34,10 @@ _ls_new_wd() {
 PROMPT_COMMAND="_ls_new_wd; $PROMPT_COMMAND"
 
 # Better history management, from http://unix.stackexchange.com/a/48113/134011
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
+HISTCONTROL=ignoreboth:erasedups  # Erase duplicates when writing the history file
+HISTSIZE=100000  # Size of history in memory
+HISTFILESIZE=100000  # Size of history file
+shopt -s histappend  # Append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -n; history -a; $PROMPT_COMMAND"
