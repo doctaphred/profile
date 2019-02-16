@@ -3,6 +3,8 @@ This file is meant to be executed on REPL startup.
 
 See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONSTARTUP
 """
+from __future__ import absolute_import, print_function
+
 from collections import *
 from contextlib import *
 from functools import *
