@@ -49,6 +49,16 @@ try:
 except ImportError:
     pass
 
+try:
+    import dataset
+except ImportError:
+    pass
+
+try:
+    from django.conf import settings
+except ImportError:
+    pass
+
 
 # Path to executable
 # e.g.: /usr/local/opt/python3/bin/python3.7
