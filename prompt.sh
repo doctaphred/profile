@@ -26,6 +26,32 @@ function errormsg {
 }
 
 
+# Load __git_ps1 function
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+
+# No separator (handled in PS1)
+GIT_PS1_STATESEPARATOR=''
+
+# Show `*` for unstaged and `+` for staged changes
+GIT_PS1_SHOWDIRTYSTATE=1
+
+# Show `$` for stashed changes
+GIT_PS1_SHOWSTASHSTATE=1
+
+# Show `%` for untracked files
+# GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# Show `<` for behind, `>` for ahead, `<>` for diverged, `=` for equal
+# GIT_PS1_SHOWUPSTREAM="auto"
+
+# Colorize dirty state like `git status -sb`
+# (Only works with PROMPT_COMMAND)
+GIT_PS1_SHOWCOLORHINTS=1
+
+# Do nothing when the current directory is ignored
+GIT_PS1_HIDE_IF_PWD_IGNORED=1
+
+
 # This will get overwritten by liquidprompt, if it's installed.
 function fancy_ps1 {
     local __timestamp_func='`date +%H:%M:%S`'
@@ -41,8 +67,7 @@ function fancy_ps1 {
 
     local __working_dir="${bold_blue}\w${reset}"
 
-    local __git_func='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1/`'
-    local __git_info="${bold_purple}${__git_func}${reset}"
+    local __git_info="${bold_purple}"'$(__git_ps1 "(%s)")'"${reset}"
 
     local __prompt="${reset}${bold}$ ${reset}"
 
