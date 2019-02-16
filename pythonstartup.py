@@ -5,6 +5,9 @@ See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONSTARTUP
 """
 from __future__ import absolute_import, print_function
 
+from datetime import datetime as dt
+start = dt.now()
+
 from collections import *
 from contextlib import *
 from functools import *
@@ -61,6 +64,10 @@ try:
 except ImportError:
     pass
 
+
+finish = dt.now()
+
+print("Imports took ", finish - start)
 
 # Path to executable
 # e.g.: /usr/local/opt/python3/bin/python3.7
