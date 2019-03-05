@@ -30,7 +30,8 @@ eval "$(direnv hook bash)"
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-source ~/profile/iterm.sh
+# iTerm shell integration
+include ~/.iterm2_shell_integration.bash
 
 # bash completion: `brew install bash-completion`
 # XXX: This might be slow...
