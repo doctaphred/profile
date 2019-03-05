@@ -11,6 +11,8 @@ numpy
 pandas
 pillow
 pip-tools
+pp-ez
+pprintpp
 psycopg2 --no-binary psycopg2  # Required to use dataset with postgres
 pygments
 pyyaml
