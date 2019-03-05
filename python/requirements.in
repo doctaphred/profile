@@ -5,6 +5,7 @@
 # cached by pip.
 dataset
 django
+docopt
 flask
 ipython
 numpy
@@ -12,6 +13,8 @@ pandas
 pdbpp
 pillow
 pip-tools
+pipdeptree
+pipsi
 pp-ez
 pprintpp
 psycopg2 --no-binary psycopg2  # Required to use dataset with postgres
@@ -20,5 +23,9 @@ pyyaml
 requests[security]
 responder
 scipy
+sh
+snakeviz
+sqlparse
 toml
+tqdm
 virtualenv  # Expected by direnv

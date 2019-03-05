@@ -19,12 +19,12 @@ backcall==0.1.0           # via ipython
 certifi==2018.11.29       # via requests
 cffi==1.12.2              # via cryptography
 chardet==3.0.4            # via requests, responder
-click==7.0                # via apistar, flask, pip-tools, uvicorn
+click==7.0                # via apistar, flask, pip-tools, pipsi, uvicorn
 cryptography==2.6.1       # via pyopenssl, requests
 dataset==1.1.2
 decorator==4.3.2          # via ipython, traitlets
 django==2.1.7
-docopt==0.6.2             # via responder
+docopt==0.6.2
 fancycompleter==0.8       # via pdbpp
 flask==1.0.2
 graphene==2.1.3           # via responder
@@ -51,6 +51,8 @@ pexpect==4.6.0            # via ipython
 pickleshare==0.7.5        # via ipython
 pillow==5.4.1
 pip-tools==3.4.0
+pipdeptree==0.13.2
+pipsi==0.9
 pp-ez==0.2.0
 pprintpp==0.4.0
 promise==2.2.1            # via graphene, graphql-core, graphql-relay, graphql-server-core
@@ -71,10 +73,15 @@ responder==1.3.0
 rfc3986==1.2.0            # via responder
 rx==1.6.1                 # via graphql-core
 scipy==1.2.1
+sh==1.12.14
 six==1.12.0               # via cryptography, dataset, graphene, graphql-core, graphql-relay, pip-tools, promise, prompt-toolkit, pyopenssl, python-dateutil, python-multipart, traitlets
+snakeviz==1.0.0
 sqlalchemy==1.3.0         # via alembic, dataset
+sqlparse==0.2.4
 starlette==0.10.7         # via responder
 toml==0.10.0
+tornado==6.0.1            # via snakeviz
+tqdm==4.31.1
 traitlets==4.3.2          # via ipython
 urllib3==1.24.1           # via requests
 uvicorn==0.5.0            # via responder
