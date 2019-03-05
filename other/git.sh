@@ -125,20 +125,24 @@ pghcl() {
     # Personal GitHub clone
     # Make sure github-personal is defined as a Host in ~/.ssh/config,
     # with an IdentityFile entry pointing to the associated private key.
+    set -x
     git clone git@github-personal:"$GITHUB_PERSONAL_ACCOUNT"/$1.git
     cd $1
     git config --local user.name "$NAME"
     git config --local user.email "$EMAIL"
+    set +x
 }
 
 wghcl() {
     # Work GitHub clone
     # Make sure github-work is defined as a Host in ~/.ssh/config,
     # with an IdentityFile entry pointing to the associated private key.
+    set -x
     git clone git@github-work:"$GITHUB_WORK_ORG"/$1.git
     cd $1
     git config --local user.name "$NAME"
     git config --local user.email "$WORK_EMAIL"
+    set +x
 }
 
 bbcl() {
