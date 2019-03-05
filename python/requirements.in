@@ -6,6 +6,7 @@
 dataset
 django
 docopt
+flake8
 flask
 ipython
 numpy
@@ -19,6 +20,7 @@ pp-ez
 pprintpp
 psycopg2 --no-binary psycopg2  # Required to use dataset with postgres
 pygments
+pytest
 pyyaml
 requests[security]
 responder
