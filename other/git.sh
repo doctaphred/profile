@@ -35,8 +35,10 @@ alias gpr='git pull --rebase'
 alias gpu='git push'  # Remember to `git config --global push.default current`
 alias gpuf='git push --force-with-lease'
 alias gsu='git submodule update'
+alias gsur='git submodule update --recursive'
 alias gsui='git submodule update --init'
 alias gsuir='git submodule update --init --recursive'
+alias gsuri='git submodule update --recursive --init'
 alias gg='git grep'
 alias grim='git rebase --interactive master'
 
@@ -90,6 +92,11 @@ gl () {
 gbdp() {
     # "git branch delete previous"
     git branch --delete @{-1}
+}
+
+gbdpf() {
+    # "git branch delete previous (force)"
+    git branch -D @{-1}
 }
 
 ggraph() {
