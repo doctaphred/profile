@@ -27,6 +27,7 @@ import time
 import traceback
 import traceback as tb
 from datetime import datetime, timedelta
+from dis import dis
 from pprint import pprint
 
 try:
