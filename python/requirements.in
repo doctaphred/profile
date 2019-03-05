@@ -13,7 +13,7 @@ pillow
 pip-tools
 pygments
 pyyaml
-requests
+requests[security]
 responder
 scipy
 toml
