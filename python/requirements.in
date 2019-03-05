@@ -1,0 +1,20 @@
+# Python libraries and tools I use a lot.
+#
+# I keep these installed in my system Python's site packages so that
+# they're available to non-project-specific REPLs and (usually) remain
+# cached by pip.
+dataset
+django
+flask
+ipython
+numpy
+pandas
+pillow
+pip-tools
+pygments
+pyyaml
+requests
+responder
+scipy
+toml
+virtualenv  # Expected by direnv
