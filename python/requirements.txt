@@ -4,6 +4,8 @@
 #
 #    pip-compile python/requirements.in
 #
+--no-binary psycopg2
+
 aiofiles==0.4.0           # via responder
 alembic==1.0.8            # via dataset
 aniso8601==3.0.2          # via graphene
@@ -49,6 +51,7 @@ pillow==5.4.1
 pip-tools==3.4.0
 promise==2.2.1            # via graphene, graphql-core, graphql-relay, graphql-server-core
 prompt-toolkit==2.0.9     # via ipython
+psycopg2==2.7.7
 ptyprocess==0.6.0         # via pexpect
 pycparser==2.19           # via cffi
 pygments==2.3.1
