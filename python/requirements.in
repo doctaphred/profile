@@ -9,6 +9,7 @@ flask
 ipython
 numpy
 pandas
+pdbpp
 pillow
 pip-tools
 pp-ez
