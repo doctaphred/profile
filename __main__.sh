@@ -31,3 +31,7 @@ eval "$(direnv hook bash)"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 source ~/profile/iterm.sh
+
+# bash completion: `brew install bash-completion`
+# XXX: This might be slow...
+include "/usr/local/etc/profile.d/bash_completion.sh"
