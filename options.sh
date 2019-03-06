@@ -31,18 +31,34 @@ _ls_new_wd() {
     __prev_wd=$PWD
 }
 
-PROMPT_COMMAND="_ls_new_wd; $PROMPT_COMMAND"
+# https://debian-administration.org/article/543/Bash_eternal_history
+__prev_hist="$(history 1)"
+_eternal_history() {
+    local __hist="$(history 1)"
+    if [[ $__prev_hist != $__hist ]]; then
+        echo $$ $USER $__hist >> ~/.bash_eternal_history
+        __prev_hist=$__hist
+    fi
+}
+
+_prompt_command() {
+    # Append history lines from this session to the history file
+    history -a
+    # Append last history command to custom "eternal history" file
+    _eternal_history
+    # List directory contents if we're in a new working directory
+    _ls_new_wd
+}
+
+PROMPT_COMMAND="_prompt_command; $PROMPT_COMMAND"
 
 # Better history management, from http://unix.stackexchange.com/a/48113/134011
 HISTCONTROL=ignoreboth:erasedups  # Erase duplicates when writing the history file
 HISTSIZE=100000  # Size of history in memory
-HISTFILESIZE=100000  # Size of history file
+HISTFILESIZE=1000000000  # Size of history file
 shopt -s histappend  # Append to history, don't overwrite it
 
 HISTTIMEFORMAT="%F %T "
-
-# Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -n; history -a; $PROMPT_COMMAND"
 
 export VISUAL='subl --new-window --wait'
 # TODO: rmate if remote and available
