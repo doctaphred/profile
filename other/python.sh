@@ -1,4 +1,4 @@
-export PYTHONSTARTUP=~/profile/pythonstartup.py
+export PYTHONSTARTUP=~/profile/python/startup.py
 
 alias ip='python3 -m IPython'
 alias ip3='python3 -m IPython'
