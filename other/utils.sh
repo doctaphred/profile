@@ -91,3 +91,9 @@ port-scan() {
 openports() {
     lsof -i -P -w -n | grep LISTEN
 }
+
+rehist() {
+    history -a  # Append this session's history to the history file
+    history -c  # Clear this session's history
+    history -r  # Read history from file
+}
