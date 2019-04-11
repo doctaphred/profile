@@ -61,6 +61,11 @@ except ImportError:
     pass
 
 try:
+    import requests
+except ImportError:
+    pass
+
+try:
     from django.conf import settings
 except ImportError:
     pass
