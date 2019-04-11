@@ -56,6 +56,17 @@ git-name() {
     git name-rev --always --name-only HEAD
 }
 
+git-current-branch() {
+    git rev-parse --abbrev-ref HEAD
+}
+
+git-retrack() {
+    # Solution to "There is no tracking information for the current branch."
+    git branch \
+        --set-upstream-to="origin"/"$(git-current-branch)" \
+        "$(git-current-branch)"
+}
+
 # Squash the previous N commits into the N+1th,
 # preserving and amending only the N+1th message.
 gsqn() {
