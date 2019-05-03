@@ -26,3 +26,7 @@ alias agj='ag --js'
 # alias pr='subl ~/profile'
 
 alias ackbar='unmute; afplay ~/Dropbox/etc/ackbar.mp3'
+
+alias pbc=pbcopy
+alias pbp=pbpaste
+alias pbr='echo 🍺'
