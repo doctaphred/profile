@@ -1,3 +1,7 @@
 SUBLIME_DIR=~"/Library/Application Support/Sublime Text 3/Packages/User"
 
-alias prof='subl --project "$SUBLIME_DIR/Projects/profile.sublime-project"'
+proj() {
+    subl --project "$SUBLIME_DIR/Projects/$1.sublime-project"
+}
+
+alias prof='proj profile'
