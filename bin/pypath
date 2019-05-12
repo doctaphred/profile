@@ -1,0 +1,17 @@
+#!/usr/bin/env bash -euo pipefail
+
+# Print the Python executable and its sys.path.
+
+py=${1:-python}  # Use the first argument, or 'python' if empty.
+args=${@:2}  # Slice any remaining positional args, starting at #2.
+
+set -x  # Print commands with variables expanded before executing them.
+
+$py $args <<EOF
+import sys
+print("sys.path of {!r}:".format(sys.executable))
+print("[")
+for p in sys.path:
+  print("  {!r},".format(p))
+print("]")
+EOF
