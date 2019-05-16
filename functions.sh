@@ -35,6 +35,10 @@ take() {
     cd -
 }
 
+# Make the `-` function work in a fresh shell.
+# (This is usually what I want to do.)
+OLDPWD=~
+
 
 v() {
     # "View"
