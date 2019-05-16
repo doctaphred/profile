@@ -1,0 +1,7 @@
+# Python libraries I use for development in most projects.
+
+flake8
+iPython
+pdbpp
+pp-ez
+pprintpp
