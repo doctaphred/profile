@@ -20,3 +20,115 @@ if exists fd; then  # `exists` is defined in functions.sh
 fi
 
 export FZF_DEFAULT_OPTS='--reverse --ansi'
+
+# Press enter to open selection with less
+alias fzl='fzf --bind "enter:execute(less {})"'
+
+# Pipe to xargs instead of using a subshell for better ctrl+c propagation.
+# Use --print0 and -0 to pass the selection as a single arg (with no
+# trailing newline), even if it contains spaces.
+alias fzx='fzf --print0 | xargs -0'
+
+pbcrp() {
+    # "pasteboard copy relative path"
+    fzf | pbcopy && echo "Copied relative path to the clipboard"
+}
+
+pbcap() {
+    # "pasteboard copy relative path"
+    fzx realpath | pbcopy && echo "Copied absolute path to the clipboard"
+}
+
+pbcf() {
+    # "pasteboard copy file"
+    # TODO: display file name?
+    fzx cat | pbcopy && echo "Copied file contents to the clipboard"
+}
+
+
+fd0() {
+    # Run fd and exit 0, even if fd's output pipe closes before it's
+    # finished.
+    $FZF_DEFAULT_COMMAND $@ || true
+}
+
+alias fd-home='fd0 . ~'
+alias fd-root='fd0 . /'
+
+alias fd-all='fd0 --hidden --no-ignore'
+alias fd-all-home='fd-all . ~'
+alias fd-all-root='fd-all . /'
+
+alias fdh=fd-home
+alias fdr=fd-root
+
+alias fda=fd-all
+alias fdah=fd-all-home
+alias fdar=fd-all-root
+
+
+alias fzf-home='fd-home | fzf'
+alias fzf-root='fd-root | fzf'
+
+alias fzf-all='fd-all | fzf'
+alias fzf-all-home='fd-all-home | fzf'
+alias fzf-all-root='fd-all-root | fzf'
+
+alias fzfh=fzf-home
+alias fzfr=fzf-root
+
+alias fzfa=fzf-all
+alias fzfah=fzf-all-home
+alias fzfar=fzf-all-root
+
+
+alias fzs='fzx subl'
+
+alias fzs-home='fd-home | fzs'
+alias fzs-root='fd-root | fzs'
+alias fzs-dev='fd0 . ~/dev | fzs'  # TODO: Finish this
+
+alias fzs-all='fd-all | fzs'
+alias fzs-all-home='fd-all-home | fzs'
+alias fzs-all-root='fd-all-root | fzs'
+
+alias fzsh=fzs-home
+alias fzsr=fzs-root
+alias fzsd=fzs-dev
+
+alias fzsa=fzs-all
+alias fzsah=fzs-all-home
+alias fzsar=fzs-all-root
+
+
+fzd() {
+    # Use fzf to select a directory, starting in an optional base directory.
+    # First cd to the base directory so fd shows relative paths.
+    # Do it in a subshell so it doesn't persist if you exit via ctrl+c.
+    (cd "$1" && fd0 --type=directory ${@:2} | fzx realpath)
+}
+
+jump() {
+    # fzf + cd == <3
+    cd "$(fzd $@)"
+}
+
+jump-all() {
+    jump "$1" --hidden --no-ignore ${@:2}
+}
+
+# Jump (home)
+alias j='jump ~'
+alias ja='jump-all ~'
+
+# Jump (dev)
+alias jd='jump ~/dev'
+alias jad='jump-all ~/dev'
+
+# Jump (root)
+alias jr='jump /'
+alias jar='jump-all /'
+
+# Jump (local)
+alias jl='jump .'
+alias jal='jump .'
