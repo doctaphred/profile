@@ -101,11 +101,17 @@ alias fzsah=fzs-all-home
 alias fzsar=fzs-all-root
 
 
+fzp() {
+    # Fuzzy-find an absolute path, using any args as a starting query.
+    fzf --query="$*" --select-1 --print0 | xargs -0 realpath
+}
+
+
 fzd() {
     # Use fzf to select a directory, starting in an optional base directory.
     # First cd to the base directory so fd shows relative paths.
     # Do it in a subshell so it doesn't persist if you exit via ctrl+c.
-    (cd "$1" && fd0 --type=directory ${@:2} | fzx realpath)
+    (cd "$1" && fd0 --type=directory | fzp ${@:2})
 }
 
 jump() {
@@ -132,3 +138,19 @@ alias jar='jump-all /'
 # Jump (local)
 alias jl='jump .'
 alias jal='jump .'
+
+jp() {
+    # Jump to project (no subdirectories).
+    cd $(
+        cd ~/dev &&
+        fd --type=directory --max-depth=1 |
+        fzp "$*"
+    )
+}
+
+sp() {
+    # Jump to project and edit in Sublime.
+    jp "$*" && subl .
+    # TODO: project support (if exists)
+    # subl --project "$SUBLIME_DIR/Projects/"$(basename $PWD)".sublime-project"
+}
