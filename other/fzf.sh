@@ -23,6 +23,8 @@ export FZF_DEFAULT_OPTS='--reverse --ansi --height=90%'
 
 # Press enter to open selection with less
 alias fzl='fzf --bind "enter:execute(less {})"'
+# Press tab to open selection with bat
+alias fzb='fzf --bind "tab:execute(bat --paging=always {})"'
 
 # Pipe to xargs instead of using a subshell for better ctrl+c propagation.
 # Use --print0 and -0 to pass the selection as a single arg (with no
