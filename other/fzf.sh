@@ -122,7 +122,7 @@ jump() {
 }
 
 jump-all() {
-    jump "$1" --hidden --no-ignore ${@:2}
+    cd "$(cd "$1" && fd --follow --hidden --no-ignore --type=directory | fzp ${@:2})"
 }
 
 # Jump (home)
