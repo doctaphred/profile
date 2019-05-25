@@ -33,12 +33,12 @@ alias fzx='fzf --print0 | xargs -0'
 
 pbcrp() {
     # "pasteboard copy relative path"
-    fzf | pbcopy && echo "Copied relative path to the clipboard"
+    fzf | pbcopy && echo "Copied $(pbpaste) to the clipboard"
 }
 
 pbcap() {
     # "pasteboard copy relative path"
-    fzx realpath | pbcopy && echo "Copied absolute path to the clipboard"
+    fzx realpath | pbcopy && echo "Copied $(pbpaste) to the clipboard"
 }
 
 pbcf() {
