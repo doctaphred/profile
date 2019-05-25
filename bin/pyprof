@@ -1,0 +1,18 @@
+#!/usr/bin/env bash -euo pipefail
+
+# Profile a program and run snakeviz in one fell swoop!
+#
+# Either pipe a file to stdin via `pyprof < my_script.py`,
+# or just run `pyprof`, type your program, and hit ctrl+D
+# on a new line.
+#
+# Creates timestamped .py and .prof files for later perusal.
+# Provide an optional filename prefix as $1; default is 'pyprof'.
+
+name="${1:-pyprof}_$(date -u +%Y%m%d_%H%M%S)"
+echo "$name"
+echo "Dumping input to $name.py (press ctrl+D on a new line to stop)"
+cat > "$name.py"
+set -x
+python -m cProfile -o "$name.prof" "$name.py"
+snakeviz "$name.prof"
