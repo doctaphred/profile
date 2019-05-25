@@ -1,0 +1,17 @@
+#!/usr/bin/env bash -euo pipefail
+
+# Because I can never remember how to use `ln`.
+
+if test -e "$1"; then
+    echo "ERROR: $1 exists:"
+    ls -l "$1"
+    exit 1
+fi
+
+if ! test -e "$2"; then
+    echo "ERROR: $2 does not exist"
+    exit 1
+fi
+
+ln -s "$2" "$1"
+ls -l "$1"
