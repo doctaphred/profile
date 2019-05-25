@@ -76,3 +76,17 @@ export LESS="\
 --LONG-PROMPT \
 --RAW-CONTROL-CHARS \
 "
+
+# TODO:
+#
+# --quit-if-one-screen \
+# --no-init \
+#
+# The second disables mouse scrolling.
+# The first without the second outputs nothing if the file fits on one page.
+# TODO: use `most`?
+
+# TODO: Use XDG config? (Does enough stuff actually support it?)
+# # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# export XDG_CONFIG_HOME="$HOME/.config"
+# export XDG_CACHE_HOME=
