@@ -103,12 +103,6 @@ alias fzsah=fzs-all-home
 alias fzsar=fzs-all-root
 
 
-fzp() {
-    # Fuzzy-find an absolute path, using any args as a starting query.
-    fzf --query="$*" --select-1 --print0 | xargs -0 realpath
-}
-
-
 fzd() {
     # Use fzf to select a directory, starting in an optional base directory.
     # First cd to the base directory so fd shows relative paths.
