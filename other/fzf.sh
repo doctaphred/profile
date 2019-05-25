@@ -19,7 +19,7 @@ if exists fd; then  # `exists` is defined in functions.sh
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-export FZF_DEFAULT_OPTS='--reverse --ansi --height=40%'
+export FZF_DEFAULT_OPTS='--reverse --ansi --height=90%'
 
 # Press enter to open selection with less
 alias fzl='fzf --bind "enter:execute(less {})"'
