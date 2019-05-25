@@ -36,8 +36,8 @@ pbcrp() {
     fzf | pbcopy && echo "Copied $(pbpaste) to the clipboard"
 }
 
-pbcap() {
-    # "pasteboard copy relative path"
+pbcp() {
+    # "pasteboard copy path"
     fzx realpath | pbcopy && echo "Copied $(pbpaste) to the clipboard"
 }
 
