@@ -145,8 +145,8 @@ jp() {
     # Jump to project (no subdirectories).
     cd $(
         cd ~/dev &&
-        fd --type=directory --max-depth=1 |
-        fzp "$*"
+        fd --follow --type=directory --max-depth=1 |
+        fzp "$@"
     )
 }
 
