@@ -1,0 +1,15 @@
+#!/usr/bin/env bash -euo pipefail
+
+path="${1:-$PWD}"
+
+# TODO: why doesn't `fd | bat` seem to do anything? (It's definitely being invoked.)
+# bat --color=always "$path" 2>/dev/null || (cd "$path" && fd --color=always --max-depth=2 | bat)
+bat --color=always "$path" 2>/dev/null || (
+        cd "$path" &&
+        fd --color=always --max-depth=2 |
+        # bat --paging=always
+        less
+    ) || (
+        echo "[$1 could not be previewed]"
+        exit 1
+    )
