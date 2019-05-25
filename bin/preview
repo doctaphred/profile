@@ -1,15 +1,25 @@
 #!/usr/bin/env bash -euo pipefail
 
+# Preview a file or directory.
+#
+# Designed for use with `fzf --preview`.
+
 path="${1:-$PWD}"
 
-# TODO: why doesn't `fd | bat` seem to do anything? (It's definitely being invoked.)
-# bat --color=always "$path" 2>/dev/null || (cd "$path" && fd --color=always --max-depth=2 | bat)
-bat --color=always "$path" 2>/dev/null || (
-        cd "$path" &&
-        fd --color=always --max-depth=2 |
-        # bat --paging=always
-        less
-    ) || (
-        echo "[$1 could not be previewed]"
-        exit 1
-    )
+if ! test -e "$path"; then
+  # True if file exists (regardless of type).
+  exit 1
+elif ! test -r "$path"; then
+    echo "['$path' is not readable]"
+elif ! test -s "$path"; then
+    echo "['$path' is empty]"
+elif test -d "$path"; then
+    # True if file exists and is a directory.
+    # -C forces multi-column output
+    CLICOLOR_FORCE=1 ls -C "$path"
+    # TODO: echo "Contents: $(ls -1 | wc -l) file(s)"
+else
+    # Consider checking `test -f` ("file exists and is a regular file")
+    # if bat barfs on other file types.
+    bat --color=always "$path"
+fi
