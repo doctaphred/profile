@@ -30,3 +30,5 @@ alias ackbar='unmute; afplay ~/Dropbox/etc/ackbar.mp3'
 alias pbc=pbcopy
 alias pbp=pbpaste
 alias pbr='printf 🍺'
+
+alias gimp='open -a GIMP-2.10.app'
