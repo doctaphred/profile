@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 import sys
 
-words = sys.argv[1:]
-
 
 def backtick(word):
     """
-    >>> backtick('ayy')
-    '`a` `y` `y`'
+    >>> backtick('aesthetic')
+    '`a` `e` `s` `t` `h` `e` `t` `i` `c`'
     """
     return ' '.join(f'`{letter}`' for letter in word)
 
 
-if __name__ == '__main__':
-    # main()
-    print('   '.join([backtick(word) for word in words]), end='')
+def aesthetic(words, *, sep=' ' * 3):
+    """
+    >>> aesthetic(['ayy', 'lmao'])
+    '`a` `y` `y`   `l` `m` `a` `o`'
+    """
+    return sep.join(backtick(word) for word in words)
+
+
+_, *words = sys.argv
+if not words:
+    words = ''.join(input()).split()
+
+print(aesthetic(words), end='')
