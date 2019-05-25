@@ -104,10 +104,20 @@ alias fzsar=fzs-all-root
 
 
 fzd() {
-    # Use fzf to select a directory, starting in an optional base directory.
-    # First cd to the base directory so fd shows relative paths.
-    # Do it in a subshell so it doesn't persist if you exit via ctrl+c.
-    (cd "$1" && fd0 --type=directory | fzp ${@:2})
+    # fzf directories from within a parent directory.
+
+    # First cd to the base directory so fzf shows relative paths. Use a
+    # subshell to avoid changing the parent's working directory in case
+    # an error occurs (e.g., if you exit via ctrl+c).
+    (cd "$1" &&
+        fd --follow --type=directory |
+        fzp ${@:2})
+}
+
+fzd-all() {
+    (cd "$1" &&
+        fd --hidden --no-ignore --follow --type=directory |
+        fzp ${@:2})
 }
 
 jump() {
@@ -119,7 +129,7 @@ jump() {
 }
 
 jump-all() {
-    cd "$(cd "$1" && fd --follow --hidden --no-ignore --type=directory | fzp ${@:2})"
+    cd "$(fzd-all $@)"
 }
 
 # Jump (home)
@@ -149,7 +159,21 @@ jp() {
 
 sp() {
     # Jump to project and edit in Sublime.
-    jp "$*" && subl .
-    # TODO: project support (if exists)
-    # subl --project "$SUBLIME_DIR/Projects/"$(basename $PWD)".sublime-project"
+    local path="$(
+        cd ~/dev &&
+        fd --follow --type=directory --max-depth=1 |
+        # TODO: What's the deal with nested quotes in bash?
+        fzp $@
+    )"
+    if test -n "$path"; then
+        # TODO: open matching project instead of directory (if it exists).
+        subl --background "$path"
+        cd "$path"
+        ls
+    fi
 }
+
+# TODO: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#changing-the-layout
+# http://www.andre-simon.de/doku/highlight/en/highlight.php
+
+# *** SUPER DUPER TODO: https://junegunn.kr/2016/07/fzf-git/
