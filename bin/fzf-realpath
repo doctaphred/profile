@@ -1,0 +1,7 @@
+#!/usr/bin/env bash -euo pipefail
+
+# Fuzzy-find an absolute path, using any args as an initial query.
+#
+# Exits immediately if there's only one match.
+
+fzf --query="$*" --preview 'preview {}' --select-1 --print0 | xargs -0 realpath
