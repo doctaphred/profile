@@ -55,7 +55,7 @@ fd0() {
 alias fd-home='fd0 . ~'
 alias fd-root='fd0 . /'
 
-alias fd-all='fd0 --hidden --no-ignore'
+alias fd-all='fd0 --hidden --no-ignore'  # Or `fd -HI`
 alias fd-all-home='fd-all . ~'
 alias fd-all-root='fd-all . /'
 
