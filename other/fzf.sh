@@ -112,6 +112,9 @@ fzd() {
 
 jump() {
     # fzf + cd == <3
+
+    # `cd` with no args defaults to $HOME, but `cd <empty string>` is a
+    # no-op: if the subshell's command gives no output, nothing happens.
     cd "$(fzd $@)"
 }
 
