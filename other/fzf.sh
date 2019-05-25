@@ -49,7 +49,7 @@ pbcf() {
 fd0() {
     # Run fd and exit 0, even if fd's output pipe closes before it's
     # finished.
-    $FZF_DEFAULT_COMMAND $@ || true
+    fd $@ || true
 }
 
 alias fd-home='fd0 . ~'
