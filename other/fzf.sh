@@ -150,11 +150,11 @@ alias jal='jump .'
 
 jp() {
     # Jump to project (no subdirectories).
-    cd $(
+    cd "$(
         cd ~/dev &&
         fd --follow --type=directory --max-depth=1 |
         fzp "$@"
-    )
+    )"
 }
 
 sp() {
@@ -162,8 +162,7 @@ sp() {
     local path="$(
         cd ~/dev &&
         fd --follow --type=directory --max-depth=1 |
-        # TODO: What's the deal with nested quotes in bash?
-        fzp $@
+        fzp "$@"
     )"
     if test -n "$path"; then
         # TODO: open matching project instead of directory (if it exists).
