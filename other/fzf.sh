@@ -19,13 +19,18 @@ if exists fd; then  # `exists` is defined in functions.sh
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --hidden --no-ignore"
 fi
 
-export FZF_DEFAULT_OPTS='
+FZF_PREVIEW='
+    test -d {} &&
+    CLICOLOR_FORCE=1 ls -C {} ||
+    bat --color=always --style=header {}
+'
+export FZF_DEFAULT_OPTS="
     --reverse
     --ansi
     --height=90%
-    --preview="preview {}"
+    --preview='$FZF_PREVIEW'
     --select-1
-'
+"
 export FZF_CTRL_R_OPTS='
     --preview-window=hidden
     --height=40%
