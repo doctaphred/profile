@@ -111,13 +111,13 @@ fzd() {
     # an error occurs (e.g., if you exit via ctrl+c).
     (cd "$1" &&
         fd --follow --type=directory |
-        fzp ${@:2})
+        fzp "${@:2}")
 }
 
 fzd-all() {
     (cd "$1" &&
         fd --hidden --no-ignore --follow --type=directory |
-        fzp ${@:2})
+        fzp "${@:2}")
 }
 
 jump() {
