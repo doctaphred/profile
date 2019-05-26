@@ -16,10 +16,21 @@ source "/usr/local/opt/fzf/shell/key-bindings.bash"
 # Use fd if it's available: https://github.com/sharkdp/fd
 if exists fd; then  # `exists` is defined in functions.sh
     export FZF_DEFAULT_COMMAND='fd --color=always'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --hidden --no-ignore"
 fi
 
-export FZF_DEFAULT_OPTS='--reverse --ansi --height=90%'
+export FZF_DEFAULT_OPTS='
+    --reverse
+    --ansi
+    --height=90%
+    --preview="preview {}"
+    --select-1
+'
+export FZF_CTRL_R_OPTS='
+    --preview-window=hidden
+    --height=40%
+    --layout=default
+'
 
 # Press enter to open selection with less
 alias fzl='fzf --bind "enter:execute(less {})"'
