@@ -172,7 +172,6 @@ sp() {
         # TODO: open matching project instead of directory (if it exists).
         subl --background "$path"
         cd "$path"
-        ls
     fi
 }
 
