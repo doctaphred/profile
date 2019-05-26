@@ -73,7 +73,7 @@ pbcf() {
 
 fd0() {
     # Run fd and exit 0, even if fd's output pipe closes before it's
-    # finished.
+    # finished. (Only seems to matter in pipelines; not in subshells.)
     fd $@ || true
 }
 
