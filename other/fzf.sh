@@ -37,11 +37,6 @@ alias fzl='fzf --bind "enter:execute(less {})"'
 # Press tab to open selection with bat
 alias fzb='fzf --bind "tab:execute(bat --paging=always {})"'
 
-# Pipe to xargs instead of using a subshell for better ctrl+c propagation.
-# Use --print0 and -0 to pass the selection as a single arg (with no
-# trailing newline), even if it contains spaces.
-alias fzx='fzf --print0 | xargs -0'
-
 pbcrp() {
     # "pasteboard copy relative path"
     fd0 --color=always --hidden --no-ignore |
@@ -105,25 +100,6 @@ alias fzfr=fzf-root
 alias fzfa=fzf-all
 alias fzfah=fzf-all-home
 alias fzfar=fzf-all-root
-
-
-alias fzs='fzx subl'
-
-alias fzs-home='fd-home | fzs'
-alias fzs-root='fd-root | fzs'
-alias fzs-dev='fd0 . ~/dev | fzs'  # TODO: Finish this
-
-alias fzs-all='fd-all | fzs'
-alias fzs-all-home='fd-all-home | fzs'
-alias fzs-all-root='fd-all-root | fzs'
-
-alias fzsh=fzs-home
-alias fzsr=fzs-root
-alias fzsd=fzs-dev
-
-alias fzsa=fzs-all
-alias fzsah=fzs-all-home
-alias fzsar=fzs-all-root
 
 
 fzd() {
@@ -194,6 +170,28 @@ sp() {
         ls
     fi
 }
+
+fzs() {
+    local path="$(fzp "${@:2}")"
+    test -n "$path" && subl "$path"
+}
+
+
+alias fzs-home='fd-home | fzs'
+alias fzs-root='fd-root | fzs'
+alias fzs-dev='fd0 . ~/dev | fzs'  # TODO: Finish this
+
+alias fzs-all='fd-all | fzs'
+alias fzs-all-home='fd-all-home | fzs'
+alias fzs-all-root='fd-all-root | fzs'
+
+alias fzsh=fzs-home
+alias fzsr=fzs-root
+alias fzsd=fzs-dev
+
+alias fzsa=fzs-all
+alias fzsah=fzs-all-home
+alias fzsar=fzs-all-root
 
 # TODO: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#changing-the-layout
 # http://www.andre-simon.de/doku/highlight/en/highlight.php
