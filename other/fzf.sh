@@ -133,13 +133,13 @@ fzd() {
     # subshell to avoid changing the parent's working directory in case
     # an error occurs (e.g., if you exit via ctrl+c).
     (cd "$1" &&
-        fd --follow --type=directory |
+        fd0 --follow --type=directory |
         fzp "${@:2}")
 }
 
 fzd-all() {
     (cd "$1" &&
-        fd --hidden --no-ignore --follow --type=directory |
+        fd0 --hidden --no-ignore --follow --type=directory |
         fzp "${@:2}")
 }
 
