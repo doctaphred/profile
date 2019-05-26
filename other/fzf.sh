@@ -44,18 +44,30 @@ alias fzx='fzf --print0 | xargs -0'
 
 pbcrp() {
     # "pasteboard copy relative path"
-    fzf | pbcopy && echo "Copied $(pbpaste) to the clipboard"
+    fd0 --color=always --hidden --no-ignore |
+    fzf |
+    pbcopy &&
+    echo "Copied '$(pbpaste)' to the pasteboard."
 }
 
 pbcp() {
     # "pasteboard copy path"
-    fzx realpath | pbcopy && echo "Copied $(pbpaste) to the clipboard"
+    fd0 --color=always --hidden --no-ignore |
+    fzp |
+    pbcopy &&
+    echo "Copied '$(pbpaste)' to the pasteboard."
 }
 
 pbcf() {
     # "pasteboard copy file"
-    # TODO: display file name?
-    fzx cat | pbcopy && echo "Copied file contents to the clipboard"
+    local path="$(
+        fd0  --type=file --color=always --hidden --no-ignore |
+        fzp "$@"
+    )"
+    if test -n "$path"; then
+        pbcopy < "$path"
+        echo "Copied contents of '$path' to the pasteboard."
+    fi
 }
 
 
