@@ -11,3 +11,5 @@ alias pycharm='open -a "PyCharm CE"'
 
 # Install libraries I use for development in most projects.
 alias pipdev='pip install -r ~/profile/python/requirements-dev.in'
+alias pyformat='python -c "help(\"FORMATTING\")"'
+
