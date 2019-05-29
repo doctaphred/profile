@@ -1,4 +1,27 @@
 #!/usr/bin/env bash -euo pipefail
 
-find . -name '*.pyc' -delete
-find . -name __pycache__ -delete
+# `cd` with no args defaults to $HOME, but `cd <empty string>` is a
+# no-op: if no argument is given, nothing happens.
+cd "${1:-}"
+
+echo "Removing compiled Python files from $PWD ..."
+
+if command -v fd >/dev/null 2>&1; then
+    # fd args:
+    #   -HI: include hidden and ignored files.
+    #   -t: only specific file types.
+    #       file: regular files (not directories).
+    #       empty: empty files or directories.
+    #   -x: execute the following command for each result.
+    #
+    # rm args:
+    #   -v: print paths as they are removed.
+    fd -HI -t file '\.pyc$' -x rm -v
+    fd -HI -t file '\.pyo$' -x rm -v
+    fd -HI -t empty '^__pycache__$' -x rm -vr
+else
+    echo "fd not found; using find"
+    find . -name '*.pyc' -delete
+    find . -name '__pycache__' -delete
+fi
+echo "Done"
