@@ -21,7 +21,7 @@ if command -v fd >/dev/null 2>&1; then
     fd -HI -t empty '^__pycache__$' -x rm -vr
 else
     echo "fd not found; using find"
-    find . -name '*.pyc' -delete
-    find . -name '__pycache__' -delete
+    find . -name '*.pyc' -exec echo {} ';' -delete
+    find . -name '__pycache__' -exec echo {} ';' -delete
 fi
 echo "Done"
