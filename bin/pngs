@@ -1,0 +1,22 @@
+#!/usr/bin/env python3 -u
+import os
+import sys
+from urllib.parse import quote_plus
+
+
+query = ' '.join(sys.argv[1:])
+
+base_url = (
+    'https://'
+    'www.google.com'
+    '/search'
+    '?tbm=isch'
+    '&tbs=ic:trans'
+    '&q='
+)
+
+url = base_url + quote_plus(query)
+
+print(f"Searching for transparent {query!r} images: {url}")
+
+os.system(f"open '{url}'")
