@@ -1,0 +1,63 @@
+#!/usr/bin/env python3 -u
+"""Helper for emojus script.
+
+TODO: Replace bash script with os.system()/subprocess.run().
+"""
+import sys
+from pathlib import Path
+
+
+data_checksum = None  # TODO
+data_url = 'https://www.unicode.org/Public/12.1.0/ucd/UnicodeData.txt'
+data_file = Path(sys.path[0]) / 'UnicodeData.txt'
+
+
+def download_data():
+    import requests
+    # TODO: stream response, verify checksum, retry
+    data = requests.get(data_url).text
+    data_file.write_text(data)
+
+
+def print_data():
+    if not data_file.exists():
+        download_data()
+    for line in data_file.open():
+        print(format_row(line.strip().split(';')))
+
+
+def format_row(row):
+    # TODO: namedtuple
+    code_point = int(row[0], 16)
+    char = chr(code_point)
+    preview = repr(char)[1:-1]
+
+    description = row[1]
+    if row[10]:
+        if row[1].startswith('<'):
+            description += f': {row[10]}'
+        else:
+            new_words = set(row[10].split()) - set(description.split())
+            if new_words:
+                description += ' ({})'.format(' '.join(new_words))
+
+    return f'{row[0]} {code_point} ({preview}): {description}'
+
+
+def get_char(line):
+    return chr(int(line.split()[0], 16))
+
+
+if __name__ == '__main__':
+    _, command = sys.argv
+    if command == 'print':
+        print_data()
+    elif command == 'parse':
+        while True:
+            try:
+                line = input()
+            except EOFError:
+                exit()
+            sys.stdout.write(get_char(line))
+    else:
+        raise Exception(command)

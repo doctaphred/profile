@@ -1,0 +1,17 @@
+#!/usr/bin/env bash -euo pipefail
+IFS=$'\n\t'
+
+# Select and copy an emojus (or other character) with fzf! 😄
+
+_emojus print | 
+fzf \
+    --preview='echo {}' \
+    --tiebreak=index \
+    --exact \
+    --multi \
+    --query="$*" \
+    --select-1 \
+    | 
+_emojus parse | 
+pbcopy &&
+pbpaste
