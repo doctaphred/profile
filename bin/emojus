@@ -3,9 +3,9 @@ IFS=$'\n\t'
 
 # Select and copy an emojus (or other character) with fzf! 😄
 
-_emojus print | 
+_emojus list | 
 fzf \
-    --preview='echo {}' \
+    --preview='_emojus preview {}' \
     --tiebreak=index \
     --exact \
     --multi \

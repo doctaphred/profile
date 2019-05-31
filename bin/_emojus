@@ -19,11 +19,16 @@ def download_data():
     data_file.write_text(data)
 
 
-def print_data():
+def get_data():
     if not data_file.exists():
         download_data()
     for line in data_file.open():
-        print(format_row(line.strip().split(';')))
+        yield line.strip().split(';')
+
+
+def print_data():
+    for line in get_data():
+        print(format_row(line))
 
 
 def format_row(row):
@@ -49,8 +54,11 @@ def get_char(line):
 
 
 if __name__ == '__main__':
-    _, command = sys.argv
-    if command == 'print':
+    _, command, *args = sys.argv
+    if command == 'preview':
+        value, = args
+        print(value)
+    elif command == 'list':
         print_data()
     elif command == 'parse':
         while True:
