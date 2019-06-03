@@ -3,6 +3,7 @@
 import base64
 import gzip
 import os
+import sys
 import tempfile
 
 
@@ -252,16 +253,17 @@ def run_applescript(*words):
 
 print(art, end='')
 
-run_applescript(
-    r'tell',
-    r'application',
-    r'"System Events"',
-    r'to',
-    r'set',
-    r'volume',
-    r'output',
-    r'volume',  # [sic]
-    r'50',
-)
 
-play_audio(sound_bite)
+if not {'-q', '--quiet'} & set(sys.argv):
+    run_applescript(
+        r'tell',
+        r'application',
+        r'"System Events"',
+        r'to',
+        r'set',
+        r'volume',
+        r'output',
+        r'volume',  # [sic]
+        r'50',
+    )
+    play_audio(sound_bite)
