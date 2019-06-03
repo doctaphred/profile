@@ -25,7 +25,6 @@ alias agj='ag --js'
 # alias ~~='subl --project ~/Dropbox/proj/home.sublime-project'
 # alias pr='subl ~/profile'
 
-alias ackbar='unmute; afplay ~/Dropbox/etc/ackbar.mp3'
 
 alias pbc=pbcopy
 alias pbp=pbpaste
