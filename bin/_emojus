@@ -19,7 +19,7 @@ def download_data():
     data_file.write_text(data)
 
 
-def get_data():
+def load_data():
     if not data_file.exists():
         download_data()
     for line in data_file.open():
@@ -27,11 +27,11 @@ def get_data():
 
 
 def print_data():
-    for line in get_data():
-        print(format_row(line))
+    for line in load_data():
+        print(line_format(line))
 
 
-def format_row(row):
+def line_format(row):
     # TODO: namedtuple
     code_point = int(row[0], 16)
     char = chr(code_point)
