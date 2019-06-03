@@ -35,7 +35,7 @@ def line_format(row):
     # TODO: namedtuple
     code_point = int(row[0], 16)
     char = chr(code_point)
-    preview = repr(char)[1:-1]
+    preview = repr(char)[1:-1]  # TODO: , etc
 
     description = row[1]
     if row[10]:
