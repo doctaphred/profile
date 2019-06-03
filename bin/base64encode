@@ -1,0 +1,17 @@
+#!/usr/bin/env python3 -u
+"""gzip and base64 encode a file."""
+import base64
+import gzip
+import shutil
+import sys
+
+
+_, inpath = sys.argv
+
+with open(inpath, 'rb') as fsrc:
+    with gzip.open(inpath + '.gz', 'wb') as fdst:
+        shutil.copyfileobj(fsrc, fdst)
+
+with open(inpath + '.gz', 'rb') as fsrc:
+    with open(inpath + '.gz.b64', 'wb') as fdst:
+        base64.encode(fsrc, fdst)
