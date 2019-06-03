@@ -26,6 +26,10 @@ def load_data():
         yield line.strip().split(';')
 
 
+def lookup(code):
+    return next(row for row in load_data() if row[0] == code)
+
+
 def print_data():
     for line in load_data():
         print(line_format(line))
@@ -49,6 +53,22 @@ def line_format(row):
     return f'{row[0]} {code_point} ({preview}): {description}'
 
 
+def preview_format(row):
+    # TODO: colors
+    code_point = int(row[0], 16)
+    char = chr(code_point)
+    preview = repr(char)[1:-1]
+    lines = [
+        f"repr: {preview}",
+        f"code point (hex): {row[0]}",
+        f"code point (dec): {code_point}",
+        f"description: {row[1]}",
+    ]
+    if row[10]:
+        lines.append(f"alternate description: {row[10]}")
+    return '\n'.join(lines)
+
+
 def get_char(line):
     return chr(int(line.split()[0], 16))
 
@@ -56,8 +76,9 @@ def get_char(line):
 if __name__ == '__main__':
     _, command, *args = sys.argv
     if command == 'preview':
-        value, = args
-        print(value)
+        arg, = args
+        row = lookup(arg.split()[0])
+        print(preview_format(row))
     elif command == 'list':
         print_data()
     elif command == 'parse':
