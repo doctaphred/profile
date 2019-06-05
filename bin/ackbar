@@ -5,6 +5,7 @@ import gzip
 import os
 import sys
 import tempfile
+from subprocess import run
 
 
 # Cribbed from `ack --bar`
@@ -252,6 +253,7 @@ def run_applescript(*words):
 
 
 print(art, end='')
+run('pbcopy', input=f"\n{art}\n", text=True)
 
 
 if not {'-q', '--quiet'} & set(sys.argv):
