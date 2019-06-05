@@ -2,7 +2,6 @@
 """Consult the Admiral."""
 import base64
 import gzip
-import os
 import sys
 import tempfile
 from subprocess import run
@@ -243,13 +242,19 @@ def play_audio(audio_data):
     # TODO: this is gross.
     with tempfile.NamedTemporaryFile(suffix='.mp3') as f:
         f.write(audio_data)
-        os.system(f"afplay {f.name}")
+        run(['afplay', f.name])
 
 
-def run_applescript(*words):
-    # TODO: this is really gross.
-    script = ' '.join(words)
-    os.system(f"osascript -e '{script}'")
+def run_applescript(script):
+    # TODO: also gross.
+    run(['osascript', '-e', script.strip()])
+
+
+def set_volume(level):
+    # TODO: so gross.
+    run_applescript(f"""
+        tell application "System Events" to set volume output volume {level}
+    """)
 
 
 print(art, end='')
@@ -257,15 +262,5 @@ run('pbcopy', input=f"\n{art}\n", text=True)
 
 
 if not {'-q', '--quiet'} & set(sys.argv):
-    run_applescript(
-        r'tell',
-        r'application',
-        r'"System Events"',
-        r'to',
-        r'set',
-        r'volume',
-        r'output',
-        r'volume',  # [sic]
-        r'50',
-    )
+    set_volume(50)
     play_audio(sound_bite)
