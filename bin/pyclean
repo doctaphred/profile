@@ -1,31 +1,58 @@
 #!/usr/bin/env bash -euo pipefail
+IFS=$'\n\t'
 
-# Remove compiled Python files from the given directory or $PWD.
+# Remove Python cruft from the given directory or $PWD.
 
 # `cd` with no args defaults to $HOME, but `cd <empty string>` is a
 # no-op: if no argument is given, nothing happens.
 cd "${1:-}"
 
-echo "Removing compiled Python files from $PWD ..."
+echo "Removing Python cruft from $PWD ..."
 
-if command -v fd >/dev/null 2>&1; then
-    # fd args:
-    #   -HI (--hidden --no-ignore): include hidden and ignored files.
-    #   -t (--type): only specific file types.
-    #       f (file): regular files (not directories).
-    #       d (directory): directories.
-    #       e (empty): empty files or directories.
-    #   -e (--extension): only files matching the extension.
-    #   -x: execute the following command for each result.
-    #
+while read pattern; do
     # rm args:
     #   -v: print paths as they are removed.
-    fd -HI -tf '\.py[cod]$' -x rm -v
-    fd -HI -td -te '^__pycache__$' -x rm -vr
-else
-    echo "fd not found; using find"
-    find . -name '__pycache__' -exec rm -rv {} +
-    find . -name '*.py[cod]' -exec rm -v {} +
-fi
-# TODO: print number of removed files.
+    find . -name "$pattern" -exec rm -vr {} +
+done <<EOF
+*.egg-info
+.hypothesis
+.mypy_cache
+.nox
+.pytest_cache
+.tox
+__pycache__
+htmlcov
+EOF
+
+while read pattern; do
+    find . -name "$pattern" -exec rm -v {} +
+done <<EOF
+*.cover
+*.egg
+*.py[cod]
+*.so
+.cache
+.coverage
+.coverage.*
+.installed.cfg
+.Python
+coverage.xml
+nosetests.xml
+EOF
+
 echo "Done"
+
+
+# Alternative using fd:
+#
+# fd -HI -tf '\.py[cod]$' -x rm -v
+# fd -HI -td -te '^__pycache__$' -x rm -vr
+#
+# fd args:
+#   -HI (--hidden --no-ignore): include hidden and ignored files.
+#   -t (--type): only specific file types.
+#       f (file): regular files (not directories).
+#       d (directory): directories.
+#       e (empty): empty files or directories.
+#   -e (--extension): only files matching the extension.
+#   -x: execute the following command for each result.
