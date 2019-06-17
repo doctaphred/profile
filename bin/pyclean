@@ -20,13 +20,12 @@ if command -v fd >/dev/null 2>&1; then
     #
     # rm args:
     #   -v: print paths as they are removed.
-    fd -HI -tf -epyc -x rm -v
-    fd -HI -tf -epyo -x rm -v
+    fd -HI -tf '\.py[cod]$' -x rm -v
     fd -HI -td -te '^__pycache__$' -x rm -vr
 else
     echo "fd not found; using find"
-    find . -name '*.pyc' -exec echo {} ';' -delete
-    find . -name '__pycache__' -exec echo {} ';' -delete
+    find . -name '__pycache__' -exec rm -rv {} +
+    find . -name '*.py[cod]' -exec rm -v {} +
 fi
 # TODO: print number of removed files.
 echo "Done"
