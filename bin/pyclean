@@ -12,7 +12,7 @@ echo "Removing Python cruft from $PWD ..."
 while read pattern; do
     # rm args:
     #   -v: print paths as they are removed.
-    find . -name "$pattern" -exec rm -vr {} +
+    find . -name "$pattern" -exec rm -r {} +
 done <<EOF
 *.egg-info
 .hypothesis
@@ -25,7 +25,7 @@ htmlcov
 EOF
 
 while read pattern; do
-    find . -name "$pattern" -exec rm -v {} +
+    find . -name "$pattern" -exec rm {} +
 done <<EOF
 *.cover
 *.egg
