@@ -4,6 +4,8 @@
 
 # Style guide: https://google.github.io/styleguide/shell.xml
 
+export PROFILE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 source ~/profile/options.sh
 source ~/profile/env.sh
 source ~/profile/aliases.sh
