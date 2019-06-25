@@ -1,0 +1,159 @@
+#!/usr/bin/env bash -euo pipefail
+IFS=$'\n\t'
+
+project_name=${1:-$(basename "$PWD")}
+
+echo "Initializing project '${project_name}'..."
+
+mkdir -p requirements "src/${project_name}" tests
+
+cat <<EOF > setup.py
+from setuptools import find_packages, setup
+
+
+# Minimum requirements for using this library in another project.
+requirements = []
+
+
+setup(
+    name='${project_name}',
+    version='0.0.1',
+    # description="",
+    author_email='doctaphred@gmail.com',
+    author='doctaphred',
+    # url='https://github.com/doctaphred/${project_name}',
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    install_requires=requirements,
+)
+EOF
+
+touch "src/${project_name}/__init__.py"
+
+cat <<EOF > "src/${project_name}/main.py"
+def function_with_doctests():
+    """These should be picked up by pytest.
+
+    >>> z = z['z'] = {}
+    >>> z
+    {'z': {...}}
+
+    >>> t = (2, [3, 4])
+    >>> t[1] += [10, 11]
+    Traceback (most recent call last):
+      ...
+    TypeError: 'tuple' object does not support item assignment
+    >>> t
+    (2, [3, 4, 10, 11])
+    """
+    pass
+EOF
+
+cat <<EOF > "tests/test_${project_name}.py"
+import pytest
+
+
+def test_something():
+    z = z['z'] = {}
+    assert repr(z) == "{'z': {...}}"
+
+    t = (2, [3, 4])
+    with pytest.raises(TypeError):
+        t[1] += [10, 11]
+    assert t == (2, [3, 4, 10, 11])
+EOF
+
+# XXX: Make sure this heredoc is indented with tabs, not spaces!
+# (Make requires tabs.)
+cat <<EOF > Makefile
+# Default action: run pytest and flake8.
+default: test lint
+
+test: venv
+	venv/bin/pytest
+
+lint: venv
+	venv/bin/flake8 *.py src tests
+
+# Create a virtualenv with all requirements installed.
+venv:
+	python3 -m venv venv
+	venv/bin/pip install pip==19.1.1
+	venv/bin/pip install -r requirements/dev.txt
+	venv/bin/pip install -e .
+
+clean:
+	-rm -r venv
+
+pin-requirements: venv
+	venv/bin/pip-compile requirements/dev.in
+	venv/bin/pip-compile requirements/build.in
+	venv/bin/pip-compile requirements/main.in
+EOF
+
+
+cat <<EOF > requirements/main.in
+# Requirements for running this project.
+EOF
+
+cat <<EOF > requirements/build.in
+# Requirements for building this project.
+
+-r main.in
+
+flake8
+pytest
+tox
+EOF
+
+cat <<EOF > requirements/dev.in
+# Requirements for developing this project.
+
+-r build.in
+
+iPython
+ipython-autotime
+pdbpp
+pip-tools
+pp-ez
+pprintpp
+EOF
+
+cat <<EOF > tox.ini
+[tox]
+envlist = {py36,py37}
+
+[testenv]
+commands =
+    pytest
+deps =
+    -r requirements/build.txt
+
+[pytest]
+addopts =
+    --doctest-modules
+testpaths = src tests
+
+[flake8]
+# TODO: specify flake8 paths here instead of Makefile
+EOF
+
+cat <<EOF > .envrc
+source venv/bin/activate
+EOF
+
+
+make clean
+# Temporarily fill in these files so we can set up the venv and pin
+# them.
+cp requirements/dev.in requirements/dev.txt
+cp requirements/build.in requirements/build.txt
+cp requirements/main.in requirements/main.txt
+make pin-requirements
+make
+
+type direnv >/dev/null 2>&1 && direnv allow
+
+echo
+echo "All set!"
+echo
