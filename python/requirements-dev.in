@@ -1,7 +1,10 @@
 # Python libraries I use for development in most projects.
 
 flake8
-iPython
+ipython
+ipython-autotime
 pdbpp
+pip-tools
 pp-ez
 pprintpp
+pytest
