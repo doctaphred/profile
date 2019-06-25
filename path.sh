@@ -14,5 +14,9 @@ export PATH=~/bin:~/profile/bin:$PATH
 # ex: ~/bin/"$(uname -s)"-"$(uname -m)" => ~/bin/Darwin-x86_64
 export PATH=~/bin/"$(uname -s)"-"$(uname -m)":~/bin/"$(uname -s)":$PATH
 
+use() {
+    export PATH="$PWD/$1:$PATH"
+}
+
 # Anaconda (anaconda.com)
 # export PATH=/usr/local/anaconda3/bin:"$PATH"
