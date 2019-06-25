@@ -1,0 +1,16 @@
+#!/usr/bin/env bash -euo pipefail
+
+path="$(dirname "$0")/$1"
+
+echo "Creating new executable at $path"
+
+set -o noclobber
+
+cat <<EOF > "$path"
+#!/usr/bin/env bash -euo pipefail
+
+EOF
+
+chmod +x "$path"
+
+$EDITOR "$path"
