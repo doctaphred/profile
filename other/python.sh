@@ -3,6 +3,10 @@ export PYTHONSTARTUP=~/profile/python/startup.py
 # Tell virtualenvs not to mess with my prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+venv() {
+    source venv/bin/activate
+}
+
 alias ip='python3 -m IPython'
 alias ip3='python3 -m IPython'
 alias ip2='python2 -m IPython'
