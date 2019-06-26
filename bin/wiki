@@ -1,0 +1,24 @@
+#!/usr/bin/env python3 -u
+"""Open a browser to a Wikipedia search for the given terms."""
+import sys
+from urllib.parse import urlencode
+from subprocess import run
+
+
+base_url = 'https://en.wikipedia.org/w/index.php'
+
+
+def query(terms):
+    joined = ' '.join(terms)
+    split = joined.split()
+    rejoined = ' '.join(split)
+    return rejoined
+
+
+if __name__ == '__main__':
+    _, *args = sys.argv
+    if not args or '-h' in args or '--help' in args:
+        exit(__doc__)
+
+    url = base_url + '?' + urlencode({'search': query(args)})
+    run(['open', url])
