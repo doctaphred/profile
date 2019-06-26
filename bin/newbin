@@ -13,4 +13,4 @@ EOF
 
 chmod +x "$path"
 
-$EDITOR "$path"
+subl "$path"
