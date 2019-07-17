@@ -1,0 +1,11 @@
+#!/usr/bin/env bash -euo pipefail
+
+# Nota Bene.
+
+nb_home="$HOME/Dropbox/Apps/Editorial/nb"
+
+filepath="$nb_home/$1.md"
+shift
+
+echo "- [ ] [$(date -u +%Y-%m-%dT%H:%M:%S)]() $@" >> "$filepath"
+echo "Noted in $filepath"
