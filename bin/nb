@@ -1,11 +1,57 @@
-#!/usr/bin/env bash -euo pipefail
+#!/usr/bin/env python3 -u
+"""nb: Nota Bene.
 
-# Nota Bene.
+Usage:
+    nb                    # Open the NB_HOME folder.
+    nb <file>             # Open the file for editing.
+    nb <file> <note>...   # Add a note to the file.
 
-nb_home="$HOME/Dropbox/Apps/Editorial/nb"
+File paths are relative to NB_HOME, and are given the .md extension.
 
-filepath="$nb_home/$1.md"
-shift
+Notes are formatted as timestamped Markdown checklists.
+"""
+import sys
+from datetime import datetime
+from pathlib import Path
+from subprocess import run
 
-echo "- [ ] [$(date -u +%Y-%m-%dT%H:%M:%S)]() $@" >> "$filepath"
-echo "Noted in $filepath"
+
+NB_HOME = Path.home() / 'Dropbox/Apps/Editorial/nb'
+ENTRY_TEMPLATE = "- [ ] [{timestamp}]() {note}"
+
+
+_, *args = sys.argv
+
+if '-h' in args or '--help' in args:
+    print(__doc__)
+    sys.exit()
+
+if not args:
+    print(f"Opening {NB_HOME}")
+    run(['open', NB_HOME])
+    sys.exit()
+
+filename, *words = args
+# Slashes in args[0] indicate subdirectories.
+filepath = NB_HOME / (filename + '.md')
+note = ' '.join(words)
+
+filepath.parent.mkdir(parents=True, exist_ok=True)
+if not filepath.exists():
+    filepath.touch()
+
+if not words:
+    print(f"Opening {filepath}")
+    run(['open', filepath])
+    sys.exit()
+
+now = datetime.now()
+
+entry = ENTRY_TEMPLATE.format(
+    timestamp=now,
+    note=note,
+)
+with open(filepath, 'a') as f:
+    print(entry, file=f)
+
+print(f"Noted in {filepath} at [{now}]")
