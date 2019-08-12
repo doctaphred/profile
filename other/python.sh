@@ -7,7 +7,7 @@ venv() {
     source venv/bin/activate
 }
 
-alias ip='python3 -m IPython'
+alias ip='python -m IPython'
 alias ip3='python3 -m IPython'
 alias ip2='python2 -m IPython'
 
