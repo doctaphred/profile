@@ -285,6 +285,9 @@ make
 
 type direnv >/dev/null 2>&1 && direnv allow
 
+git init
+git add .
+
 echo
 echo "All set!"
 echo
