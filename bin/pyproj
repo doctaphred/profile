@@ -16,14 +16,14 @@ requirements = []
 
 
 setup(
-    name='${project_name}',
-    version='0.0.1',
+    name="${project_name}",
+    version="0.0.1",
     # description="",
-    author_email='doctaphred@gmail.com',
-    author='doctaphred',
-    # url='https://github.com/doctaphred/${project_name}',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
+    # author_email="",
+    # author="",
+    # url="https://github.com/<account>/${project_name}",
+    packages=find_packages("src"),
+    package_dir={"": "src"},
     install_requires=requirements,
 )
 EOF
