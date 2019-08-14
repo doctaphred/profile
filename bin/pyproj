@@ -140,7 +140,7 @@ EOF
 
 
 # Taken from https://github.com/github/gitignore
-cat <<EOF > .gitignore
+cat <<'EOF' > .gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
