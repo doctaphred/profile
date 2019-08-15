@@ -1,0 +1,4 @@
+#!/usr/bin/env bash -euo pipefail
+# Pretty-print the JSON on the (macOS) clipboard.
+# Works with Python 2 or 3.
+pbpaste | python -m json.tool | pbcopy
