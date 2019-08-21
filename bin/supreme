@@ -1,0 +1,114 @@
+#!/usr/bin/env python3 -u
+"""
+Lifted from https://github.com/doctaphred/ansicolor/
+"""
+
+colors = {
+    'default': '9',
+    'black': '0',
+    'red': '1',
+    'green': '2',
+    'yellow': '3',
+    'blue': '4',
+    'magenta': '5',
+    'cyan': '6',
+    'gray': '7',
+}
+
+effects = {
+    'bold': '1',
+    'faint': '2',
+    'italic': '3',
+    'underline': '4',
+    'blink': '5',
+    'negative': '7',
+    'hidden': '8',
+    'strikethrough': '9',
+}
+
+FG_PREFIX = '3'
+BG_PREFIX = '4'
+BRIGHT_FG_PREFIX = '9'
+BRIGHT_BG_PREFIX = '10'
+RESET_EVERYTHING = '0'
+ESCAPE = '\x1b'
+RESET = '\x1b[0m'
+
+
+color_info = {}
+for name, code in colors.items():
+    color_info[name] = (name, False)
+for name, code in colors.items():
+    color_info['bright_' + name] = (name, True)
+    color_info['bright ' + name] = (name, True)
+color_info['dark_gray'] = ('black', True)
+color_info['dark gray'] = ('black', True)
+color_info['white'] = ('gray', True)
+
+
+def color_code(color_name, fg=True):
+    color, bright = color_info[color_name]
+    if fg:
+        if bright:
+            return BRIGHT_FG_PREFIX + colors[color]
+        else:
+            return FG_PREFIX + colors[color]
+    else:
+        if bright:
+            return BRIGHT_BG_PREFIX + colors[color]
+        else:
+            return BG_PREFIX + colors[color]
+
+
+class AnsiFormat:
+
+    def __init__(self, *effects, fg=None, bg=None):
+        self.fg = fg
+        self.bg = bg
+        self.effects = effects
+
+    def _codes(self):
+        yield RESET_EVERYTHING
+        if self.fg is not None:
+            yield color_code(self.fg, fg=True)
+        if self.bg is not None:
+            yield color_code(self.bg, fg=False)
+        for effect in self.effects:
+            yield effects[effect]
+
+    def codes(self):
+        return ';'.join(self._codes())
+
+    def seq(self, esc=ESCAPE):
+        return '{}[{}m'.format(esc, self.codes())
+
+    def __str__(self):
+        return self.seq()
+
+    def __repr__(self):
+        attrs = ', '.join(
+            '{}={}'.format(name, getattr(self, name))
+            for name, _ in self.attrs
+        )
+        return '{}({})'.format(self.__class__.__name__, attrs)
+
+
+reset = AnsiFormat()
+
+
+def colorize(obj, *effects, fg=None, bg=None, esc=ESCAPE, end=reset):
+    return '{}{}{}'.format(
+        AnsiFormat(*effects, fg=fg, bg=bg).seq(esc),
+        obj,
+        end.seq(esc),
+    )
+
+
+if __name__ == '__main__':
+    import sys
+    args = sys.argv[1:]
+    if args:
+        msg = ' '.join(args)
+    else:
+        msg = sys.stdin.read()
+    print(colorize(msg, 'italic', 'bold', fg='white', bg='red'))
