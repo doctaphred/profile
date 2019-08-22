@@ -72,18 +72,18 @@ git-retrack() {
 # preserving and amending only the N+1th message.
 gsqn() {
     # Git squash N
-    git reset --soft HEAD~$1 && git commit --amend
+    git reset --soft "HEAD~$1" && git commit --amend
 }
 
 alias gsq='gsqn 1'
 
 gri() {
     # Git rebase interactive
-    git rebase --interactive HEAD~$1
+    git rebase --interactive "HEAD~$1"
 }
 
 ga() {
-    git add $@
+    git add "$@"
     git status
 }
 alias gu='ga --update'
@@ -98,17 +98,17 @@ gl () {
     # %d: ref names, like the --decorate option of git-log(1)
     # %C(red): switch to red text
     # %<(16): add spaces on the right to fit the next % to 16 columns; truncate the right side
-    git log --pretty=format:'%C(yellow)%h%C(reset) %C(green)%<(16,trunc)%an%C(reset) %C(magenta)%<(14)%cr%C(reset)%C(red)%d%C(reset) %s' $@
+    git log --pretty=format:'%C(yellow)%h%C(reset) %C(green)%<(16,trunc)%an%C(reset) %C(magenta)%<(14)%cr%C(reset)%C(red)%d%C(reset) %s' "$@"
 }
 
 gbdp() {
     # "git branch delete previous"
-    git branch --delete @{-1}
+    git branch --delete '@{-1}'
 }
 
 gbdpf() {
     # "git branch delete previous (force)"
-    git branch -D @{-1}
+    git branch -D '@{-1}'
 }
 
 ggraph() {
@@ -124,7 +124,7 @@ gre() {
 
 gcl() {
     # Git clone
-    git clone git@$1.git
+    git clone "git@$1.git"
 }
 
 ghcl() {
@@ -138,7 +138,7 @@ pghcl() {
     # Make sure github-personal is defined as a Host in ~/.ssh/config,
     # with an IdentityFile entry pointing to the associated private key.
     set -x
-    git clone git@github-personal:"$GITHUB_PERSONAL_ACCOUNT"/$1.git
+    git clone "git@github-personal:$GITHUB_PERSONAL_ACCOUNT/$1.git"
     cd $1
     git config --local user.name "$NAME"
     git config --local user.email "$EMAIL"
@@ -150,7 +150,7 @@ wghcl() {
     # Make sure github-work is defined as a Host in ~/.ssh/config,
     # with an IdentityFile entry pointing to the associated private key.
     set -x
-    git clone git@github-work:"$GITHUB_WORK_ORG"/$1.git
+    git clone "git@github-work:$GITHUB_WORK_ORG/$1.git"
     cd $1
     git config --local user.name "$NAME"
     git config --local user.email "$WORK_EMAIL"
@@ -159,13 +159,13 @@ wghcl() {
 
 bbcl() {
     # Bitbucket clone
-    git clone git@bitbucket.com:$1/$2.git
-    cd $2
+    git clone "git@bitbucket.com:$1/$2.git"
+    cd "$2"
 }
 
 git-set-origin-ssh() {
     git remote remove origin
-    git remote add origin git@github.com:doctaphred/${PWD##*/}.git
+    git remote add origin "git@github.com:doctaphred/${PWD##*/}.git"
 }
 
 alias such=git
