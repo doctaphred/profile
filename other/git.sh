@@ -129,8 +129,8 @@ gcl() {
 
 ghcl() {
     # GitHub clone
-    git clone git@github.com:$1/$2.git
-    cd $2
+    git clone "git@github.com:$1/$2.git" "${@:3}"
+    cd "$2"
 }
 
 pghcl() {
