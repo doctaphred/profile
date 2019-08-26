@@ -6,5 +6,6 @@ export CFLAGS=-I/usr/local/opt/openssl/include
 export CC=gcc-8
 export CXX=g++-8
 
-# Compile for this specific architecture (performance optimization)
-export CFLAGS="-march=native"
+# TODO: combine this with the above CFLAGS?
+# # Compile for this specific architecture (performance optimization)
+# export CFLAGS="-march=native"
