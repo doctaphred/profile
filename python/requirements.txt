@@ -24,10 +24,6 @@ apispec==1.0.0 \
 apistar==0.6.0 \
     --hash=sha256:4338b24468b49526ceac4a8f84046056081ee747f373ca8d0647bd6b2344c895 \
     # via responder
-appnope==0.1.0 \
-    --hash=sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0 \
-    --hash=sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71 \
-    # via ipython
 asgiref==2.3.2 \
     --hash=sha256:9b05dcd41a6a89ca8c6e7f7e4089c3f3e76b5af60aebb81ae6d455ad81989c97 \
     --hash=sha256:b21dc4c43d7aba5a844f4c48b8f49d56277bc34937fd9f9cb93ec97fde7e3082 \
@@ -122,9 +118,9 @@ decorator==4.3.2 \
     --hash=sha256:33cd704aea07b4c28b3eb2c97d288a06918275dac0ecebdaf1bc8a48d98adb9e \
     --hash=sha256:cabb249f4710888a2fc0e13e9a16c343d932033718ff62e1e9bc93a9d3a9122b \
     # via ipython, traitlets
-django==2.1.7 \
-    --hash=sha256:275bec66fd2588dd517ada59b8bfb23d4a9abc5a362349139ddda3c7ff6f5ade \
-    --hash=sha256:939652e9d34d7d53d74d5d8ef82a19e5f8bb2de75618f7e5360691b6e9667963
+django==2.1.11 \
+    --hash=sha256:1a41831eace203fd1939edf899e07d7abd12ce9bafc3d9a5a63a24a8d1d12bd5 \
+    --hash=sha256:305b6c4fce9e03bb746e35780c2c4d52f29ea1669f15633cfd41bc8821c74c76
 docopt==0.6.2 \
     --hash=sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491
 entrypoints==0.3 \
