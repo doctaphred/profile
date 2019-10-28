@@ -36,6 +36,7 @@ alias gpr='git pull --rebase'
 alias gpu='git push'  # Remember to `git config --global push.default current`
 alias gpuf='git push --force-with-lease'
 alias yeet='git push --force-with-lease'
+alias YEET='git push --force --no-verify'
 alias gsu='git submodule update'
 alias gsur='git submodule update --recursive'
 alias gsui='git submodule update --init'
