@@ -24,10 +24,6 @@ apispec==1.0.0 \
 apistar==0.6.0 \
     --hash=sha256:4338b24468b49526ceac4a8f84046056081ee747f373ca8d0647bd6b2344c895 \
     # via responder
-appnope==0.1.0 \
-    --hash=sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0 \
-    --hash=sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71 \
-    # via ipython
 asgiref==2.3.2 \
     --hash=sha256:9b05dcd41a6a89ca8c6e7f7e4089c3f3e76b5af60aebb81ae6d455ad81989c97 \
     --hash=sha256:b21dc4c43d7aba5a844f4c48b8f49d56277bc34937fd9f9cb93ec97fde7e3082 \
@@ -544,9 +540,9 @@ websockets==7.0 \
     --hash=sha256:f8d59627702d2ff27cb495ca1abdea8bd8d581de425c56e93bff6517134e0a9b \
     --hash=sha256:fc30cdf2e949a2225b012a7911d1d031df3d23e99b7eda7dfc982dc4a860dae9 \
     # via uvicorn
-werkzeug==0.14.1 \
-    --hash=sha256:c3fd7a7d41976d9f44db327260e263132466836cef6f91512889ed60ad26557c \
-    --hash=sha256:d5da73735293558eb1651ee2fddc4d0dedcfa06538b8813a2e20011583c9e49b \
+werkzeug==0.15.3 \
+    --hash=sha256:97660b282aa7e29f94f3fe378e5c7162d7ab9d601a8dbb1cbb2ffc8f0e54607d \
+    --hash=sha256:cfd1281b1748288e59762c0e174d64d8bcb2b70e7c57bc4a1203c8825af24ac3 \
     # via flask
 whitenoise==4.1.2 \
     --hash=sha256:118ab3e5f815d380171b100b05b76de2a07612f422368a201a9ffdeefb2251c1 \
