@@ -25,19 +25,20 @@ shopt -s autocd
 
 # ls-after-cd, inspired by http://pastebin.com/VBSQJyeA
 # Insert into PROMPT_COMMAND
-__prev_wd=$PWD
+__prev_wd="$PWD"
 _ls_new_wd() {
-    [[ $__prev_wd != $PWD ]] && ls
-    __prev_wd=$PWD
+    [[ $__prev_wd != "$PWD" ]] && ls
+    __prev_wd="$PWD"
 }
 
 # https://debian-administration.org/article/543/Bash_eternal_history
 __prev_hist="$(history 1)"
 _eternal_history() {
-    local __hist="$(history 1)"
-    if [[ $__prev_hist != $__hist ]]; then
-        echo $$ $USER $__hist >> ~/.bash_eternal_history
-        __prev_hist=$__hist
+    local __hist
+    __hist="$(history 1)"
+    if [[ "$__prev_hist" != "$__hist" ]]; then
+        echo $$ "$USER" "$__hist" >> ~/.bash_eternal_history
+        __prev_hist="$__hist"
     fi
 }
 
@@ -62,7 +63,7 @@ HISTTIMEFORMAT="%F %T "
 
 export VISUAL='subl --new-window --wait'
 # TODO: rmate if remote and available
-export EDITOR="$VISUAL"
+export EDITOR=$VISUAL
 
 # Enable ls colors
 export CLICOLOR=1
