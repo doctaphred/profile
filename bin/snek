@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# If no executable is specified, fall back to normal $PATH semantics.
+SNEK="${SNEK-$(which python)}"
+
+# Print version info to stderr.
+"$SNEK" --version >&2
+
+set -x  # Echo subsequent commands to stderr.
+"$SNEK" "$@"
