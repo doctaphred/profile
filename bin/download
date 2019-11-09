@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+content="$1"
+path="$2"
+url="$3"
+
+mkdir -p "$(dirname "$path")"
+test -e "$path" || curl "$url" > "$path"
+shasum -a256 -c <<< "$content  $path" > /dev/null
+cat "$path"

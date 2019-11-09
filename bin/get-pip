@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# TODO: integrate with snek
+
+content="b86f36cc4345ae87bfd4f10ef6b2dbfa7a872fbff70608a1e43944d283fd0eee"
+path="$HOME/profile/downloads/get-pip.py"
+# The official host, https://bootstrap.pypa.io/, does not offer any sort
+# of checksums or even pinned versions, so use their GitHub instead.
+url="https://raw.githubusercontent.com/pypa/get-pip/ffe826207a010164265d9cc807978e3604d18ca0/get-pip.py"
+
+(download "$content" "$path" "$url") | snek
