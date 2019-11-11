@@ -15,7 +15,7 @@ export PATH=~/bin:~/profile/bin:$PATH
 export PATH=~/bin/"$(uname -s)"-"$(uname -m)":~/bin/"$(uname -s)":$PATH
 
 use() {
-    export PATH="$PWD/$1:$PATH"
+    export PATH="$(realpath "$1"):$PATH"
 }
 
 # Anaconda (anaconda.com)
