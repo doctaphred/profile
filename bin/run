@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Run a command in the scripts directory.
+
 if test $# = 0; then
     # If no args, just list the directory contents.
     # (`ls` is usually configured to highlight executable files.)
     ls "$PROFILE/scripts"
 else
+    # Don't update $PATH; just execute the file directly: if it runs
+    # other commands, executables in the 'scripts' directory won't
+    # shadow any executables on $PATH with the same name.
     "$PROFILE/scripts/$1" "${@:2}"
 fi
