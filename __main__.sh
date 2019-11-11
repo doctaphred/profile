@@ -4,36 +4,37 @@
 
 # Style guide: https://google.github.io/styleguide/shell.xml
 
-export PROFILE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+set -e  # Exit immediately if there's an error.
 
-source ~/profile/options.sh
-source ~/profile/env.sh
-source ~/profile/aliases.sh
-source ~/profile/functions.sh
-source ~/profile/path.sh
-source ~/profile/prompt.sh
+# Get the directory containing this script, and resolve any symlinks.
+# (n.b. `BASH_SOURCE` is an array, but we just want the first element.)
+export PROFILE="$(realpath "$(dirname "$BASH_SOURCE")")"
 
-# Source each '.sh' file in the `source` directory in lexicographical order
-for f in ~/profile/other/*.sh; do
-    source "$f"
+# Source these files in this specific order.
+source "$PROFILE/options.sh"
+source "$PROFILE/env.sh"
+source "$PROFILE/aliases.sh"
+source "$PROFILE/functions.sh"
+source "$PROFILE/path.sh"
+source "$PROFILE/prompt.sh"
+
+# Source these files in arbitrary order.
+# TODO: is this okay if paths contain spaces?
+for path in $(find "$PROFILE/other" -name '*.sh'); do
+    source "$path"
 done
-
-# # Only source this file in interactive shells, not from a script or from scp
-# [[ $- = *i* ]] && source ~/profile/interactive.sh
-
-# Profile modifications which should not be published
-# include ~/private/profile.sh
 
 # direnv: https://github.com/direnv/direnv
 eval "$(direnv hook bash)"
 
-# eval "$(pyenv init -)"
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # iTerm shell integration
 include ~/.iterm2_shell_integration.bash
+
+# Now that we're done with setup, disable errexit so failed commands
+# don't quit the interactive shell.
+#
+# TODO: figure out why the bash completion script below encounters an error.
+set +e
 
 # bash completion: `brew install bash-completion`
 # XXX: This might be slow...
