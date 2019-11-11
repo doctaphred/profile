@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run a command using GNU coreutils, if available.
+
+# If no args, just list the available executables.
+test -n "$*" || ls /usr/local/opt/coreutils/libexec/gnubin
+
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH-}"
+
+"$@"
