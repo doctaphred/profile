@@ -6,12 +6,16 @@ set -euo pipefail
 if test $# = 0; then
     # If no args, just list the directory contents.
     # (`ls` is usually configured to highlight executable files.)
+    echo /usr/local/opt/coreutils/libexec/gnubin
     ls /usr/local/opt/coreutils/libexec/gnubin
 else
     # Update $PATH instead of just executing the specified file: if it
     # runs other commands, it will use the updated path to locate them.
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     # TODO: why doesn't, e.g., `gnu man find` seem to work?
+    # UPDATE: looks like it's not included in coreutils (??)
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH-}"
+    # Print the executable path to stderr.
+    >&2 which "$1"
     "$@"
 fi
