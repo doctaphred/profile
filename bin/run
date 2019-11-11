@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if test $# = 0; then
+    # If no args, just list the directory contents.
+    # (`ls` is usually configured to highlight executable files.)
+    ls "$PROFILE/scripts"
+else
+    "$PROFILE/scripts/$1" "${@:2}"
+fi
