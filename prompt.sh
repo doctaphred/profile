@@ -17,15 +17,6 @@ bold_cyan='\[\e[01;36m\]'
 gray='\[\e[0;37m\]'
 bold_gray='\[\e[01;37m\]'
 
-
-function errormsg {
-    local prev=$?
-    if [ $prev != 0 ]; then
-        echo -e "\e[01;31m\n$(sysexit-info $prev)\e[0m"
-    fi
-}
-
-
 # Load __git_ps1 function
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 
@@ -51,26 +42,83 @@ GIT_PS1_SHOWCOLORHINTS=1
 # Do nothing when the current directory is ignored
 GIT_PS1_HIDE_IF_PWD_IGNORED=1
 
-
-# This will get overwritten by liquidprompt, if it's installed.
-function fancy_ps1 {
-    local __timestamp_func='`date +%H:%M:%S`'
-    local __timestamp="${bold_black}${__timestamp_func}${reset}"
-
-    local __errormsg_func='`errormsg`'
-    local __errormsg="${__errormsg_func}"
-
-    local __user_and_host="${bold_green}\u@\h${reset}"
-
-    local __pyinfo_func='`pyinfo --short --brew`'
-    local __python_info="${bold_cyan}${__pyinfo_func}${reset}"
-
-    local __working_dir="${bold_blue}\w${reset}"
-
-    local __git_info="${bold_purple}"'$(__git_ps1 "(%s)")'"${reset}"
-
-    local __prompt="${reset}${bold}$ ${reset}"
-
-    export PS1="${reset}${__errormsg}\n${__timestamp} ${__user_and_host} ${__python_info} ${__working_dir} ${__git_info}\n${__prompt}"
+errinfo () {
+	err=${1:-$?}
+	test $err = 0 && return
+	echo -n "Error $err: "
+    case $err in
+        # 0) echo '[not an error]';;
+        1) echo '[default error code]' ;;
+        2) echo 'Error with shell builtin' ;;
+        126) echo 'Cannot execute command. Do you need to `chmod a+x` it?' ;;
+        127) echo 'Command not found. Is it on your $PATH? Did you make a typo?' ;;
+        128) echo 'Invalid argument to exit' ;;
+        129) echo 'Terminated by SIGHUP' ;;
+        130) echo 'Terminated by SIGINT' ;;
+        131) echo 'Terminated by SIGQUIT' ;;
+        132) echo 'Terminated by SIGILL' ;;
+        133) echo 'Terminated by SIGTRAP' ;;
+        134) echo 'Terminated by SIGABRT' ;;
+        135) echo 'Terminated by SIGEMT' ;;
+        136) echo 'Terminated by SIGFPE' ;;
+        137) echo 'Terminated by SIGKILL' ;;
+        138) echo 'Terminated by SIGBUS' ;;
+        139) echo 'Terminated by SIGSEGV' ;;
+        140) echo 'Terminated by SIGSYS' ;;
+        141) echo 'Terminated by SIGPIPE' ;;
+        142) echo 'Terminated by SIGALRM' ;;
+        143) echo 'Terminated by SIGTERM' ;;
+        144) echo 'Terminated by SIGURG' ;;
+        145) echo 'Terminated by SIGSTOP' ;;
+        146) echo 'Terminated by SIGTSTP' ;;
+        147) echo 'Terminated by SIGCONT' ;;
+        148) echo 'Terminated by SIGCHLD' ;;
+        149) echo 'Terminated by SIGTTIN' ;;
+        150) echo 'Terminated by SIGTTOU' ;;
+        151) echo 'Terminated by SIGIO' ;;
+        152) echo 'Terminated by SIGXCPU' ;;
+        153) echo 'Terminated by SIGXFSZ' ;;
+        154) echo 'Terminated by SIGVTALRM' ;;
+        155) echo 'Terminated by SIGPROF' ;;
+        156) echo 'Terminated by SIGWINCH' ;;
+        157) echo 'Terminated by SIGINFO' ;;
+        158) echo 'Terminated by SIGUSR1' ;;
+        159) echo 'Terminated by SIGUSR2' ;;
+        255) echo 'Exit status out of range' ;;
+        *) echo 'Unknown error' ;;
+    esac
 }
-fancy_ps1
+
+pyinfo () {
+	where=$(dirname $(dirname $(which python)))
+	echo -n "$(
+		# XXX: Indented heredocs MUST be indented with tabs, not spaces.
+		python <<-EOF
+			import platform
+			print(platform.python_version())
+		EOF
+	)"
+	if test "$where" != "/usr/local"; then
+		echo -n " ($(
+			realpath --no-symlinks --relative-to="$PWD" "$where"
+		))"
+	fi
+	echo
+}
+
+# TODO: Bash's built-in prompt escape sequences are hella confusing,
+# especially since they use the same escape character as normal strings.
+# (Also, not sure how trailing newlines are handled.) Consider defining
+# `PS0='$(ps0)'` and `PS1='$(ps1)'`, and replacing the escapes with
+# explicit function/command calls.
+
+timestamp="${bold_black}\D{%Y-%m-%d %H:%M:%S %Z}${reset}"
+errinfo="${bold_red}\$(errinfo)${reset}"
+myinfo="${bold_green}\u@\H${reset}"
+workdir="${bold_blue}\w${reset}"
+pyinfo="${bold_cyan}\$(pyinfo)${reset}"
+gitinfo="${bold_purple}\$(__git_ps1 '(%s)')${reset}"
+prompt="${bold}\\\$${reset}"
+
+PS0="\n$timestamp\n\n"
+PS1="\n$timestamp\n$errinfo\n$myinfo $workdir 🐍 $pyinfo $gitinfo\n$prompt "
