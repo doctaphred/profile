@@ -13,8 +13,9 @@ alias lah='ls -lAh'
 alias edit='subl --new-window'
 alias e=edit
 
-# The bash built-in 'time' occludes the actual 'time' program;
-# only the latter has the handy -l option
+# The bash keyword 'time' occludes the actual 'time' program; only the
+# latter has the handy -l option. (bash keywords can't be disabled via
+# `enable -n`.)
 alias time='/usr/bin/env time'
 
 alias ag='ag --smart-case --pager "less -R -S"'
