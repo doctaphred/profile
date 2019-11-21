@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""
+Slack's new WYSIWYG format broke copy/pasting multiline code blocks:
+blank lines are omitted when pasting as plain text.
+
+If you can get the HTML contents of the clipboard, this script can
+output the expected text, blank lines and all.
+
+The macOS clipboard is complicated, and the built-in `pbpaste` command
+won't let you get the contents as HTML. (The `-Prefer` option seems to
+not do anything at all: there's even a related bug documented in the
+`pbpaste` man page.) Christopher Brown's `macos-pasteboard` project
+works well for me: https://github.com/chbrown/macos-pasteboard (Thanks,
+Christopher!) (Linux probably has similar tools available.)
+
+Suggested usage with `macos-pasteboard`:
+
+    pbv public.html | print-slack-clipboard
+
+"""
+import sys
+from html.parser import HTMLParser
+
+
+class SlackClipboardPrinter(HTMLParser):
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'br':
+            print()
+        elif tag == 'span':
+            for attr in attrs:
+                if attr == ('data-stringify-type', 'paragraph-break'):
+                    print('\n')
+
+    def handle_data(self, data):
+        print(data, end='')
+
+
+SlackClipboardPrinter().feed(str(sys.stdin.read()))
