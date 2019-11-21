@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{
+    2>/dev/null help "$@" ||
+    2>/dev/null "$@" --help ||
+    2>/dev/null "$@" -h ||
+    2>/dev/null "$@" -h ||
+    2>/dev/null type "$@" ||
+    {
+        2>&1 echo '¯\_(ツ)_/¯'
+        exit 1
+    }
+} | less
