@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case $# in
+    1)
+        path="$1"
+    ;;
+    2)
+        path="$1"
+        cd "$2"
+    ;;
+    *)
+        echo "Expected 1-2 args; got $#"
+        return 1
+    ;;
+esac
+
+if test -d "$path"; then
+    open -a Finder.app "$path"
+elif test -e "$path"; then
+    # Use absolute path to accommodate iTerm (??)
+    /usr/local/bin/subl --add "$path"
+else
+    # Assume it's a URL.
+    open -a Firefox.app "$path"
+fi
