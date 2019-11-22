@@ -1,14 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+log () {
+    >&2 echo "$@"
+}
+
+me="$(basename "$0")"
+
+if test $# = 0; then
+    log "$me: Get help for a command from *somewhere*!"
+elif test "$1" = "$me"; then
+    log 'ಠ_ಠ'
+    exit 1
+fi
+
 {
+    2>/dev/null man "$@" ||
     2>/dev/null help "$@" ||
     2>/dev/null "$@" --help ||
     2>/dev/null "$@" -h ||
-    2>/dev/null "$@" -h ||
     2>/dev/null type "$@" ||
     {
-        2>&1 echo '¯\_(ツ)_/¯'
+        log '¯\_(ツ)_/¯'
         exit 1
     }
-} | less
+} | less --quit-if-one-screen
