@@ -1,16 +1,36 @@
-#!/usr/bin/env bash -euo pipefail
+#!/usr/bin/env bash
+set -euo pipefail
 
-path="$(dirname "$0")/$1"
+dir="$(dirname "$0")"
 
-echo "Creating new executable at $path"
+case $# in
+    0)
+        path="$(mktemp $dir/newbin-XXX)"
+    ;;
+    1)
+        path="$dir/$1"
+    ;;
+    *)
+        >&2 echo "ERROR: Don't know what to do with $# args"
+        exit 1
+    ;;
+esac
 
-set -o noclobber
+# -s: True if file exists and has a size greater than zero.
+if test -s "$path"; then
+    >&2 echo "ERROR: $path already exists"
+    exit 1
+fi
+
+touch "$path"
+chmod +x "$path"
 
 cat <<EOF > "$path"
-#!/usr/bin/env bash -euo pipefail
+#!/usr/bin/env bash
+set -euo pipefail
 
 EOF
 
-chmod +x "$path"
+echo "$path"
 
 subl "$path"
