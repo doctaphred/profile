@@ -1,3 +1,4 @@
-#!/usr/bin/env bash -euo pipefail
+#!/usr/bin/env bash
+set -euo pipefail
 
-subl `which $1`
+subl --new-window "$(which "$@")"
