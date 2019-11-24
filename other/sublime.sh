@@ -8,7 +8,7 @@ proj() {
         # Use a subshell so cd doesn't affect the parent directory.
         cd "$SUBLIME_PROJECT_DIR"
         # TODO: Exclude extensions from display.
-        path="$(fd '\.sublime-project$' | fzp $@)"
+        path="$(fd '\.sublime-project$' | fzp "$@")"
         if test -n "$path"; then
             set -x
             # TODO: does the --project flag actually do anything?
