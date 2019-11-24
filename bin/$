@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Passthrough command, in case of accidental copy/paste from prompt.
+set -x
+"$@"
