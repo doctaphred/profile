@@ -48,9 +48,9 @@ alias grim='git rebase --interactive master'
 git-in() {
     # Perform a git command in the given directory.
     # (Assumes the git directory is `.git` within the work tree.)
-    dir=$1
+    dir="$1"
     shift
-    git --git-dir=$dir/.git --work-tree=$dir $@
+    git --git-dir="$dir/.git" --work-tree="$dir" "$@"
 }
 
 git-name() {
