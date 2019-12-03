@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Escape the tyranny of Sublime's build system!
+#
+# This script is designed to be the command target of a `.sublime-build`
+# file in Sublime's `Packages/User` directory.
+#
+# Sublime expands the following variables within a build's "cmd",
+# "shell_cmd" or "working_dir" options:
+#
+#     $packages
+#         The path to the Packages/ folder
+#     $platform
+#         A string containing the platform Sublime Text is running on: windows, osx or linux.
+#     $file
+#         The full path, including folder, to the file in the active view.
+#     $file_path
+#         The path to the folder that contains the file in the active view.
+#     $file_name
+#         The file name (sans folder path) of the file in the active view.
+#     $file_base_name
+#         The file name, exluding the extension, of the file in the active view.
+#     $file_extension
+#         The extension of the file name of the file in the active view.
+#     $folder
+#         The full path to the first folder open in the side bar.
+#     $project
+#         The full path to the current project file.
+#     $project_path
+#         The path to the folder containing the current project file.
+#     $project_name
+#         The file name (sans folder path) of the current project file.
+#     $project_base_name
+#         The file name, excluding the extension, of the current project file.
+#     $project_extension
+#         The extension of the current project file.
+#
+# n.b. These variables are **not** expanded in the build system's "env"
+# option, so instead they must be passed to this script by abusing
+# "shell_cmd":
+#
+#     {
+#         "shell_cmd": "SUBLIME_PACKAGES='$packages' ... sublime-build"
+#     }
+#
+# See https://www.sublimetext.com/docs/3/build_systems.html
+
+# TODO: do something useful.
+env | grep SUBLIME
