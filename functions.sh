@@ -29,6 +29,13 @@ take() {
     cd $1
 }
 
+tktemp() {
+    # Create a tempdir, then cd into it.
+    name="${1:-temp}"
+    now="$(date -u +%FT%TZ)"
+    cd "$(mktemp -d "$name-$now-XXX")"
+}
+
 
 -() {
     # cd to previous directory
