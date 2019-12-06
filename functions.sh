@@ -7,7 +7,7 @@ include() {
 include-all() {
     # Source all files in a directory
     # shopt -s nullglob
-    for f in "$1"/*; do source $f; done
+    for f in "$1"/*; do source "$f"; done
 }
 
 
@@ -18,8 +18,8 @@ exists() {
 
 
 maybe() {
-    # Excecute the command, if it exists.
-    exists $1 && $@
+    # Execute the command, if it exists.
+    exists "$1" && "$@"
 }
 
 
@@ -72,13 +72,13 @@ mergeout() {
     # Run the command, merging stderr to stdout.
     # Also consider `|&` (pipe both stdout and stderr)
     # (bash only; not available in sh)
-    $@ 2>&1
+    "$@" 2>&1
 }
 
 
 background() {
     # Start a background process, ignoring stdout and stderr
-    $@ > /dev/null 2>&1 &
+    "$@" > /dev/null 2>&1 &
 }
 
 
