@@ -17,9 +17,6 @@ bold_cyan='\[\e[01;36m\]'
 gray='\[\e[0;37m\]'
 bold_gray='\[\e[01;37m\]'
 
-# Load __git_ps1 function
-source /usr/local/etc/bash_completion.d/git-prompt.sh
-
 # No separator (handled in PS1)
 GIT_PS1_STATESEPARATOR=''
 
@@ -106,6 +103,22 @@ pyinfo () {
 	echo
 }
 
+gitinfo () {
+     {
+        commit="$(git rev-parse --short HEAD)"
+        branch="$(git rev-parse --abbrev-ref HEAD)"
+        ago="$(git log -1 --format='%cr' HEAD)"
+    } 2>/dev/null || return
+    echo "🌳 $branch ($commit, $ago)"
+}
+
+stashinfo () {
+    {
+        stashed="$(git stash list -1 --format='%cr')"
+    } 2>/dev/null || return
+    test -n "$stashed" && echo "🗄  ($stashed)"
+}
+
 # TODO: Bash's built-in prompt escape sequences are hella confusing,
 # especially since they use the same escape character as normal strings.
 # (Also, not sure how trailing newlines are handled.) Consider defining
@@ -117,8 +130,9 @@ errinfo="${bold_red}\$(errinfo)${reset}"
 myinfo="${bold_green}\u@\H${reset}"
 workdir="${bold_blue}\w${reset}"
 pyinfo="${bold_cyan}\$(pyinfo)${reset}"
-gitinfo="${bold_purple}\$(__git_ps1 '(%s)')${reset}"
+gitinfo="${bold_purple}\$(gitinfo)${reset}"
+stashinfo="\$(stashinfo)"
 prompt="${bold}\\\$${reset}"
 
 PS0="\n$timestamp\n\n"
-PS1="\n$timestamp\n$errinfo\n$myinfo $workdir 🐍 $pyinfo $gitinfo\n$prompt "
+PS1="\n$timestamp\n$errinfo\n$myinfo $workdir 🐍 $pyinfo $gitinfo $stashinfo\n$prompt "
