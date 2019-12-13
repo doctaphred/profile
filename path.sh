@@ -1,7 +1,15 @@
 # $PATH modifications
 
+path () {
+    echo "$PATH" | tr -s ":" "\n"
+}
+
 use () {
-    export PATH="$(realpath "$1"):$PATH"
+    PATH="$(realpath "$1"):$PATH"
+}
+
+unuse () {
+    PATH="${PATH#*:}"
 }
 
 # Systemd shell executable directory
