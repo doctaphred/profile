@@ -5,12 +5,10 @@ alias gsh='git show'
 alias gshn='git show --name-only'
 alias gsn='git show --name-only'
 alias gst='git stash'
-alias gstu='git stash --include-untracked'
 alias gsta='git stash --include-untracked'
 alias gsts='git stash show --patch'  # --patch: Show diff, not just names
 alias gstsh='git stash show --patch'
 alias gstl='git stash list'
-alias gsl='git stash list'
 alias gstp='git stash pop'
 alias gstcl='git stash clear'
 alias gstd='git stash drop'
@@ -31,7 +29,6 @@ alias gchb='git checkout -b'
 alias gr='git reset'
 alias grs='git reset --soft'
 alias gf='git fetch'
-alias gp='git pull'
 # `git config --global rebase.autoStash true` makes this much nicer
 alias gpr='git pull --rebase'
 alias gpu='git push'  # Remember to `git config --global push.default current`
@@ -89,9 +86,8 @@ ga() {
     git add "$@"
     git status
 }
-alias gu='ga --update'
-alias gau='gu'
-alias gcu='git add --update && git status && git commit'
+alias gau='ga --update'
+alias gauc='git add --update && git status && git commit'
 
 gl () {
     # %h: abbreviated commit hash
