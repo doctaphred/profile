@@ -67,20 +67,16 @@ errinfo () {
 }
 
 pyinfo () {
-	where=$(dirname $(dirname $(which python)))
-	echo -n "$(
-		# XXX: Indented heredocs MUST be indented with tabs, not spaces.
-		python <<-EOF
-			import platform
-			print(platform.python_version())
+    python <<-EOF
+		from __future__ import print_function
+		import platform
+		print(platform.python_version(), end='')
 		EOF
-	)"
-	if test "$where" != "/usr/local"; then
-		echo -n " ($(
-			realpath --no-symlinks --relative-to="$PWD" "$where"
-		))"
-	fi
-	echo
+    where="$(dirname $(dirname $(which python)))"
+    if test "$where" != "/usr/local"; then
+        where_rel="$(realpath --no-symlinks --relative-to="$PWD" "$where")"
+        echo -n " ($where_rel)"
+    fi
 }
 
 gitinfo () {
