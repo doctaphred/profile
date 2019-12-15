@@ -1,3 +1,5 @@
+prohibit-subshells
+
 # Aliases and functions for working with Git and GitHub
 
 alias gs='git status'

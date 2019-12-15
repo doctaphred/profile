@@ -2,6 +2,8 @@
 # WORK_EMAIL
 # GITHUB_WORK_ORG
 
+prohibit-subshells
+
 export NAME="Frederick Wagner"
 export EMAIL="doctaphred@gmail.com"
 export GITHUB_PERSONAL_ACCOUNT="doctaphred"

@@ -1,5 +1,7 @@
 # $PATH modifications
 
+prohibit-subshells
+
 path () {
     echo "$PATH" | tr -s ":" "\n"
 }

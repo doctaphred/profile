@@ -1,3 +1,5 @@
+prohibit-subshells
+
 alias please=sudo  # Mind your manners!
 alias pseudo=sudo
 alias nuke='rm -rf'

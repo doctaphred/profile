@@ -1,3 +1,5 @@
+prohibit-subshells
+
 reset='\[\e[0m\]'
 bold='\[\e[1m\]'
 black='\[\e[0;30m\]'

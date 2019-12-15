@@ -1,6 +1,8 @@
 # See http://tldp.org/LDP/abs/html/options.html
 # See https://sipb.mit.edu/doc/safe-shell/
 
+prohibit-subshells
+
 # Abort at first error, when a command exits with non-zero status.
 # set -e
 

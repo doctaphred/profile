@@ -17,6 +17,26 @@ log "PID: $BASHPID"
 # (n.b. `BASH_SOURCE` is an array, but we just want the first element.)
 export PROFILE="$(realpath "$(dirname "$BASH_SOURCE")")"
 
+prohibit-subshells () {
+	# Call this function in additional setup scripts to prevent
+	# accidentally sourcing them in a subshell.
+	if test $$ != $BASHPID; then
+		>&2 cat <<-EOF
+
+		ERROR in ${BASH_SOURCE[1]}:
+
+		This file is meant to be sourced in the current active shell
+		(PID $$), but was run in a subshell (PID $BASHPID): any changes
+		it makes to the shell environment (including aliases and
+		function definitions) will have no effect in the parent shell.
+
+		EOF
+		exit 1
+	fi
+}
+
+prohibit-subshells  # Just in case!
+
 # Source these files in this specific order.
 source "$PROFILE/options.sh"
 source "$PROFILE/env.sh"
