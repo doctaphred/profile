@@ -7,7 +7,7 @@
 set -e  # Exit immediately if there's an error.
 
 log () {
-    >&2 echo "$@"
+	>&2 echo "$@"
 }
 
 log "Shell: $SHELL ($BASH_VERSION)"
@@ -28,7 +28,7 @@ source "$PROFILE/prompt.sh"
 # Source these files in arbitrary order.
 # TODO: is this okay if paths contain spaces?
 for path in $(find "$PROFILE/other" -name '*.sh'); do
-    source "$path"
+	source "$path"
 done
 
 # direnv: https://github.com/direnv/direnv
