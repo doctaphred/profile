@@ -5,6 +5,8 @@
 # Style guide: https://google.github.io/styleguide/shell.xml
 
 set -e  # Exit immediately if there's an error.
+echo "Shell: $SHELL ($BASH_VERSION)"
+echo "PID: $BASHPID"
 
 # Get the directory containing this script, and resolve any symlinks.
 # (n.b. `BASH_SOURCE` is an array, but we just want the first element.)
