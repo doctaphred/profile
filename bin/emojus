@@ -1,7 +1,7 @@
 #!/usr/bin/env python3 -u
-"""Helper for emojus script.
+"""Emojus picker.
 
-TODO: Replace bash script with os.system()/subprocess.run().
+Requires https://github.com/junegunn/fzf
 
 See:
 - https://en.wikipedia.org/wiki/Unicode_character_property
