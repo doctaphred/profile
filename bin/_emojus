@@ -10,6 +10,7 @@ See:
 TODO: visual similarity metrics.
 """
 import sys
+import unicodedata
 from pathlib import Path
 
 
@@ -64,10 +65,42 @@ def preview_format(row):
     code_point = int(row[0], 16)
     char = chr(code_point)
     preview = repr(char)[1:-1]
-    lines = [
+
+    lines = ['Fields:']
+    lines += [
+        f"  {i:2}: {field}"
+        for i, field in enumerate(row)
+    ]
+    lines.append('')
+
+    lines += [
+        "unicodedata:",
+        f"  name: {unicodedata.name(char, '')}",
+        f"  decimal value: {unicodedata.decimal(char, '')}",
+        f"  digit value: {unicodedata.digit(char, '')}",
+        f"  numeric value: {unicodedata.numeric(char, '')}",
+        f"  general category: {unicodedata.category(char)}",
+        f"  bidirectional class: {unicodedata.bidirectional(char)}",
+        f"  combining class: {unicodedata.combining(char)}",
+        f"  east asian width: {unicodedata.east_asian_width(char)}",
+        f"  mirrored: {unicodedata.mirrored(char)}",
+        f"  decomposition: {unicodedata.decomposition(char)}",
+        "",
+        "normalized forms:",
+        # Canonical decomposition.
+        f"   NFD: {unicodedata.normalize('NFD', char)}",
+        # Canonical composition of decomposition.
+        f"   NFC: {unicodedata.normalize('NFC', char)}",
+        # Compatibility decomposition.
+        f"  NFKD: {unicodedata.normalize('NFKD', char)}",
+        # Canonical composition of compatibility decomposition.
+        f"  NFKC: {unicodedata.normalize('NFKC', char)}",
+        "",
         f"repr: {preview}",
         f"code point (hex): {row[0]}",
         f"code point (dec): {code_point}",
+        f"general category: {row[2]}",
+        f"bidirectional class: {row[4]}",
         f"description: {row[1]}",
     ]
     if row[10]:
