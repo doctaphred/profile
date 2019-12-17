@@ -1,17 +1,152 @@
-#!/usr/bin/env bash -euo pipefail
-IFS=$'\n\t'
+#!/usr/bin/env python3 -u
+"""Helper for emojus script.
 
-# Select and copy an emojus (or other character) with fzf! 😄
+TODO: Replace bash script with os.system()/subprocess.run().
 
-_emojus list | 
-fzf \
-    --preview='_emojus preview {}' \
-    --tiebreak=index \
-    --exact \
-    --multi \
-    --query="$*" \
-    --select-1 \
-    | 
-_emojus parse | 
-pbcopy &&
-pbpaste
+See:
+- https://en.wikipedia.org/wiki/Unicode_character_property
+- https://en.wikipedia.org/wiki/Zero-width_joiner
+
+TODO: visual similarity metrics.
+"""
+import sys
+import unicodedata
+from pathlib import Path
+
+
+data_checksum = None  # TODO
+data_url = 'https://www.unicode.org/Public/12.1.0/ucd/UnicodeData.txt'
+data_file = Path(sys.path[0]) / 'UnicodeData.txt'
+
+
+def download_data():
+    import requests
+    # TODO: stream response, verify checksum, retry
+    data = requests.get(data_url).text
+    data_file.write_text(data)
+
+
+def load_data():
+    if not data_file.exists():
+        download_data()
+    for line in data_file.open():
+        yield line.strip().split(';')
+
+
+def lookup(code):
+    return next(row for row in load_data() if row[0] == code)
+
+
+def print_data():
+    for line in load_data():
+        print(line_format(line))
+
+
+def line_format(row):
+    # TODO: namedtuple
+    code_point = int(row[0], 16)
+    char = chr(code_point)
+    preview = repr(char)[1:-1]  # TODO: , etc
+
+    description = row[1]
+    if row[10]:
+        if row[1].startswith('<'):
+            description += f': {row[10]}'
+        else:
+            new_words = set(row[10].split()) - set(description.split())
+            if new_words:
+                description += ' ({})'.format(' '.join(new_words))
+
+    return f'{row[0]} {code_point} ({preview}): {description}'
+
+
+def preview_format(row):
+    # TODO: colors
+    code_point = int(row[0], 16)
+    char = chr(code_point)
+    preview = repr(char)[1:-1]
+
+    lines = ['Fields:']
+    lines += [
+        f"  {i:2}: {field}"
+        for i, field in enumerate(row)
+    ]
+    lines.append('')
+
+    lines += [
+        "unicodedata:",
+        f"  name: {unicodedata.name(char, '')}",
+        f"  decimal value: {unicodedata.decimal(char, '')}",
+        f"  digit value: {unicodedata.digit(char, '')}",
+        f"  numeric value: {unicodedata.numeric(char, '')}",
+        f"  general category: {unicodedata.category(char)}",
+        f"  bidirectional class: {unicodedata.bidirectional(char)}",
+        f"  combining class: {unicodedata.combining(char)}",
+        f"  east asian width: {unicodedata.east_asian_width(char)}",
+        f"  mirrored: {unicodedata.mirrored(char)}",
+        f"  decomposition: {unicodedata.decomposition(char)}",
+        "",
+        "normalized forms:",
+        # Canonical decomposition.
+        f"   NFD: {unicodedata.normalize('NFD', char)}",
+        # Canonical composition of decomposition.
+        f"   NFC: {unicodedata.normalize('NFC', char)}",
+        # Compatibility decomposition.
+        f"  NFKD: {unicodedata.normalize('NFKD', char)}",
+        # Canonical composition of compatibility decomposition.
+        f"  NFKC: {unicodedata.normalize('NFKC', char)}",
+        "",
+        f"repr: {preview}",
+        f"code point (hex): {row[0]}",
+        f"code point (dec): {code_point}",
+        f"general category: {row[2]}",
+        f"bidirectional class: {row[4]}",
+        f"description: {row[1]}",
+    ]
+    if row[10]:
+        lines.append(f"alternate description: {row[10]}")
+    return '\n'.join(lines)
+
+
+def get_char(line):
+    return chr(int(line.split()[0], 16))
+
+
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        from subprocess import run
+        # TODO: Do this a little nicer? (e.g., don't fork a whole new
+        # Python process for each preview?)
+        me = sys.argv[0]
+        run(fr"""
+            "{me}" list |
+            fzf \
+                --preview='"{me}" preview {{}}' \
+                --tiebreak=index \
+                --exact \
+                --multi \
+                --query="$*" \
+                --select-1 \
+                |
+            "{me}" parse |
+            pbcopy &&
+            pbpaste
+            """, shell=True)
+        sys.exit()
+
+    _, command, *args = sys.argv
+    if command == 'preview':
+        arg, = args
+        row = lookup(arg.split()[0])
+        print(preview_format(row))
+    elif command == 'list':
+        print_data()
+    elif command == 'parse':
+        while True:
+            try:
+                line = input()
+            except EOFError:
+                exit()
+            sys.stdout.write(get_char(line))
+    else:
+        raise Exception(command)
