@@ -113,6 +113,27 @@ def get_char(line):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        from subprocess import run
+        # TODO: Do this a little nicer? (e.g., don't fork a whole new
+        # Python process for each preview?)
+        me = sys.argv[0]
+        run(fr"""
+            "{me}" list |
+            fzf \
+                --preview='"{me}" preview {{}}' \
+                --tiebreak=index \
+                --exact \
+                --multi \
+                --query="$*" \
+                --select-1 \
+                |
+            "{me}" parse |
+            pbcopy &&
+            pbpaste
+            """, shell=True)
+        sys.exit()
+
     _, command, *args = sys.argv
     if command == 'preview':
         arg, = args
