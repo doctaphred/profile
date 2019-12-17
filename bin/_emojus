@@ -2,6 +2,12 @@
 """Helper for emojus script.
 
 TODO: Replace bash script with os.system()/subprocess.run().
+
+See:
+- https://en.wikipedia.org/wiki/Unicode_character_property
+- https://en.wikipedia.org/wiki/Zero-width_joiner
+
+TODO: visual similarity metrics.
 """
 import sys
 from pathlib import Path
