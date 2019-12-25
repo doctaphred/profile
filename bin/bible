@@ -3,9 +3,5 @@ set -euo pipefail
 
 # Search biblegateway.
 
-# XXX: `open "https://...search=$@"` expands the string into multiple
-# args if `$@` contains spaces (even with `IFS=$'\n\t'`). Why, and
-# what's a better approach than using a goofy temporary variable?
-
-query="$@"
-open "https://www.biblegateway.com/passage/?version=ESV;AMP&search=$@"
+# NOTE: Use "$*", not "$@", to avoid expanding into multiple strings.
+open "https://www.biblegateway.com/passage/?version=ESV;AMP&search=$*"
