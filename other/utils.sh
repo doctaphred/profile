@@ -1,3 +1,15 @@
+join () {
+    # Intersperse the first arg between the rest.
+    sep="$1"
+    shift
+    echo -n "$1"
+    shift
+    for arg in "$@"; do
+        echo -n "$sep"
+        echo -n "$arg"
+    done
+}
+
 trim-whitespace () {
     # Remove trailing whitespace of all files recursively.
     # Ignores .git and .svn folders and their contents.
