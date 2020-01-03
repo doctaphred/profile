@@ -77,15 +77,15 @@ samefile () {
 wake-on-lan () {
     # http://stackoverflow.com/a/31588036/1752050
     # example MAC: 11:22:33:44:55:66
-    MAC=$1
+    MAC="$1"
     Broadcast=255.255.255.255
     PortNumber=4000
-    echo -e $(
-        echo $(
+    echo -e "$(
+        echo "$(
             printf 'f%.0s' {1..12};
             printf "$(echo $MAC | sed 's/://g')%.0s" {1..16};
-        ) | sed -e 's/../\\x&/g'
-    ) | nc -w1 -u -b $Broadcast $PortNumber
+        )" | sed -e 's/../\\x&/g'
+    )" | nc -w1 -u -b $Broadcast $PortNumber
 }
 
 openports() {
