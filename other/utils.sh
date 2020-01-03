@@ -88,14 +88,6 @@ wake-on-lan () {
     ) | nc -w1 -u -b $Broadcast $PortNumber
 }
 
-port-scan() {
-    echo "Scanning $1 for open ports..."
-    for port in {1..65535}
-    do
-      (echo >"/dev/tcp/$1/$port") 2>/dev/null && echo "$1:$port is open"
-    done
-}
-
 openports() {
     lsof -i -P -w -n | grep LISTEN
 }

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Scanning $1 for open ports..."
+for port in {1..65535}
+do
+  (echo >"/dev/tcp/$1/$port") 2>/dev/null && echo "$1:$port is open"
+done
