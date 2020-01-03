@@ -34,7 +34,7 @@ alias unmutemic='setmic 50'
 
 # Copy working directory to clipboard
 cpwd () {
-    echo $PWD | pbcopy
+    pwd | pbcopy
 }
 
 alias getip='dig +short myip.opendns.com @resolver1.opendns.com'
@@ -47,17 +47,17 @@ alias cpip-local='getip-local | pbcopy'
 
 # Open Google Chrome
 chrome () {
-    open -a "Google Chrome" $@
+    open -a "Google Chrome" "$*"
 }
 
 # Open Firefox
 ff () {
-    open -a Firefox $@
+    open -a Firefox "$*"
 }
 
 # Open Safari
 safari () {
-    open -a Safari $@
+    open -a Safari "$*"
 }
 
 json-to-yaml () {
@@ -67,11 +67,11 @@ json-to-yaml () {
 
 tabs-to-spaces () {
     # Expand tabs in all files that don't start with a dot
-    find . $@ \! -name ".*" \! -type d -exec bash -c 'expand -t 4' {} \;
+    find . "$@" \! -name ".*" \! -type d -exec bash -c 'expand -t 4' {} \;
 }
 
 samefile () {
-    cmp --silent $@
+    cmp --silent "$@"
 }
 
 wake-on-lan () {
@@ -92,7 +92,7 @@ port-scan() {
     echo "Scanning $1 for open ports..."
     for port in {1..65535}
     do
-      (echo > /dev/tcp/$1/$port) 2>/dev/null && echo $1:$port is open
+      (echo >"/dev/tcp/$1/$port") 2>/dev/null && echo "$1:$port is open"
     done
 }
 
