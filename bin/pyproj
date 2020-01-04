@@ -134,6 +134,10 @@ deps =
 [pytest]
 addopts =
     --doctest-modules
+    --doctest-glob='*.doctest'
+    --doctest-glob='*.rst'
+    --doctest-glob='*.md'
+    --doctest-glob='*.txt'
 testpaths = src tests
 
 [flake8]
