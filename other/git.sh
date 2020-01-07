@@ -44,6 +44,7 @@ alias gsuir='git submodule update --init --recursive'
 alias gsuri='git submodule update --recursive --init'
 alias gg='git grep'
 alias grim='git rebase --interactive master'
+alias gcl='git clone'
 
 git-in() {
     # Perform a git command in the given directory.
@@ -121,11 +122,6 @@ alias gll='git log'
 
 gre() {
     git rebase --interactive HEAD~@1
-}
-
-gcl() {
-    # Git clone
-    git clone "git@$1.git"
 }
 
 ghcl() {
