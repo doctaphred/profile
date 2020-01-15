@@ -16,6 +16,13 @@ venv() {
     source venv/bin/activate
 }
 
+newvenv() {
+    name="${1-venv-$RANDOM}"
+    shift
+    python3 -m venv "$name" "$@"
+    use "$name"
+}
+
 alias ip='python -m IPython'
 alias ip3='python3 -m IPython'
 alias ip2='python2 -m IPython'
