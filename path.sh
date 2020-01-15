@@ -7,7 +7,7 @@ path () {
 }
 
 use () {
-    PATH="$(realpath "$1"):$PATH"
+    PATH="$(realpath "$1"/bin):$PATH"
 }
 
 unuse () {
@@ -15,8 +15,9 @@ unuse () {
 }
 
 # Systemd shell executable directory
-use ~/.local/bin
+use ~/.local
 
 # My personal executables (nonstandard locations)
-use ~/bin
-use ~/profile/bin
+use ~
+use ~/profile
+use ~/stuff
