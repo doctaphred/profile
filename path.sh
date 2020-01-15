@@ -7,7 +7,11 @@ path () {
 }
 
 use () {
-    PATH="$(realpath "$1"/bin):$PATH"
+    # Add a directory to $PATH.
+    # TODO: MANPATH?
+    dir="$1"
+    bindir="${2-bin}"
+    PATH="$(realpath "$dir/$bindir"):$PATH"
 }
 
 unuse () {
