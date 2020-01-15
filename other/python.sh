@@ -19,7 +19,7 @@ venv() {
 newvenv() {
     name="${1-venv-$RANDOM}"
     shift
-    python3 -m venv "$name" "$@"
+    "${PYTHON-python3}" -m venv "$name" "$@"
     use "$name"
 }
 
