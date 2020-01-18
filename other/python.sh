@@ -12,15 +12,17 @@ export PYTHONWARNINGS='ignore:DEPRECATION::pip._internal.cli.base_command:'
 # Tell virtualenvs not to mess with my prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-venv() {
-    source venv/bin/activate
-}
-
-newvenv() {
+venv () {
     name="${1-venv-$RANDOM}"
     shift
     "${PYTHON-python3}" -m venv "$name" "$@"
     use "$name"
+    pip install --upgrade pip
+}
+
+venv-dev () {
+    venv venv "$@"
+    pip install flake8 ipython pp-ez pytest
 }
 
 alias ip='python -m IPython'
