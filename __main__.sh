@@ -6,6 +6,13 @@
 
 set -e  # Exit immediately if there's an error.
 
+# XXX: Many external scripts rely on the 'nounset' (`set -u`) option to
+# be *disabled* (the unfortunate default) -- not only when sourcing
+# them, but sometimes even afterward (e.g., 'git-completion.bash').
+#
+# Someday I will write my own shell and will not have to deal with this
+# nonsense; but until that day, don't run `set -u` in your bash profile!
+
 log () {
 	>&2 echo "$@"
 }
