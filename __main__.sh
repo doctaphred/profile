@@ -15,11 +15,11 @@ set -e  # Exit immediately if there's an error.
 
 log () {
 	# Echo cyan text to stderr with some contextual information.
-	>&2 echo -en "\033[0;36m"  # Style: reset; cyan foreground.
-	# >&2 echo -n "[${FUNCNAME[1]}] "  # Prefix with calling function name.
-	>&2 echo -n "$*"
-	>&2 echo -e "\033[0m"  # Style: reset.
-}
+	echo -en "\033[0;36m"  # Style: reset; cyan foreground.
+	# echo -n "[${FUNCNAME[1]}] "  # Prefix with calling function name.
+	echo -n "$*"
+	echo -e "\033[0m"  # Style: reset.
+} >&2
 
 log "Shell: $SHELL ($BASH_VERSION)"
 log "PID: $BASHPID"
