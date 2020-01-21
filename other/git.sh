@@ -130,6 +130,15 @@ ghcl() {
     cd "${!#}"
 }
 
+ghcl-multi() {
+    xargs -n1 -P32 -I% git clone "git@github.com:%.git"
+}
+
+ghcl-multi-org() {
+    org="$1"
+    xargs -n1 -P32 -I% git clone "git@github.com:$1/%.git"
+}
+
 pghcl() {
     # Personal GitHub clone
     # Make sure github-personal is defined as a Host in ~/.ssh/config,
