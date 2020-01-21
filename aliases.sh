@@ -6,11 +6,8 @@ alias nuke='rm -rf'
 alias chmod-yolo='chmod 777'
 alias kj='kill %'  # Kill Job
 
-alias la='ls -A'
-alias ll='ls -lh'
-alias lla='ls -Alh'
-alias lal='ls -Alh'
-alias lah='ls -lAh'
+alias la='ls -Ab'
+alias ll='ls -@AbelGhiOT'
 
 alias edit='subl --new-window'
 alias e=edit
