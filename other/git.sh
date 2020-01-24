@@ -131,6 +131,13 @@ ghcl() {
     git submodule update --recursive --init
 }
 
+ghql() {
+    # GitHub qlone
+    git clone "git@github.com:quantopian/$1.git" "${@:2}" 2>&1| tr Cc Qq
+    cd "${!#}"
+    git submodule update --recursive --init
+}
+
 ghcl-multi() {
     xargs -n1 -P32 -I% git clone "git@github.com:%.git"
 }
