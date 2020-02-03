@@ -72,7 +72,7 @@ pyinfo () {
 		import platform
 		print(platform.python_version(), end='')
 		EOF
-    where="$(dirname $(dirname $(which python)))"
+    where="$(dirname "$(dirname "$(which python)")")"
     if test "$where" != "/usr/local"; then
         where_rel="$(realpath --no-symlinks --relative-to="$PWD" "$where")"
         echo -n " ($where_rel)"
