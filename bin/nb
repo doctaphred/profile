@@ -10,13 +10,17 @@ File paths are relative to NB_HOME, and are given the .md extension.
 
 Notes are formatted as timestamped Markdown checklists.
 """
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import run
 
+try:
+    NB_HOME = os.environ['NB_HOME']
+except KeyError:
+    NB_HOME = Path.home() / 'Dropbox/Apps/Editorial/nb'
 
-NB_HOME = Path.home() / 'Dropbox/Apps/Editorial/nb'
 ENTRY_TEMPLATE = "- [ ] [{timestamp}]() {note}"
 
 
