@@ -61,6 +61,7 @@ source "$PROFILE/prompt.sh"
 for path in $(find "$PROFILE/other" -name '*.sh'); do
 	source "$path"
 done
+unset path
 
 # direnv: https://github.com/direnv/direnv
 eval "$(direnv hook bash)"
