@@ -7,7 +7,8 @@ alias chmod-yolo='chmod 777'
 alias kj='kill %'  # Kill Job
 
 alias la='ls -Ab'
-alias ll='ls -@AbelGhiOT'
+alias ll='ls -AbelGhiOT'
+alias lll='ls -@AbelGhiOT'  # Include extended attributes (multiple lines)
 
 alias edit='subl --new-window'
 alias e=edit
