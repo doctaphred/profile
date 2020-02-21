@@ -42,6 +42,8 @@ try:
     import pandas as pd
 except ImportError:
     pass
+else:
+    DF = pd.DataFrame
 
 try:
     import pp
