@@ -75,6 +75,10 @@ finish = dt.now()
 
 print("Imports took ", finish - start)
 
+
+nan = NaN = float('nan')
+
+
 # Path to executable
 # e.g.: /usr/local/opt/python3/bin/python3.7
 print(sys.executable)
