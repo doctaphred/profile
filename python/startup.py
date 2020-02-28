@@ -66,6 +66,11 @@ except ImportError:
     pass
 
 try:
+    from tqdm import tqdm
+except ImportError:
+    pass
+
+try:
     from django.conf import settings
 except ImportError:
     pass
