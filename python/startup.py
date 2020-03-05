@@ -14,6 +14,7 @@ from math import *  # Includes nan
 from operator import *
 from traceback import *
 from urllib import *
+from urllib.parse import *
 
 import array
 import ast
@@ -50,6 +51,7 @@ import traceback
 import traceback as tb
 import unicodedata
 import urllib
+import urllib.parse
 import weakref
 import zipfile
 from datetime import datetime, timedelta
