@@ -13,6 +13,7 @@ from itertools import *
 from math import *  # Includes nan
 from operator import *
 from traceback import *
+from urllib import *
 
 import array
 import ast
@@ -48,6 +49,7 @@ import timeit
 import traceback
 import traceback as tb
 import unicodedata
+import urllib
 import weakref
 import zipfile
 from datetime import datetime, timedelta
