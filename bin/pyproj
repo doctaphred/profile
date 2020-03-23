@@ -292,6 +292,8 @@ make
 type direnv >/dev/null 2>&1 && direnv allow
 
 git init
+git add .
+git commit -m "Initial commit, via pyproj"
 
 echo
 echo "All set!"
