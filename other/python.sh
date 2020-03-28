@@ -25,6 +25,8 @@ venv-dev () {
     pip install flake8 ipython pp-ez pytest
 }
 
+alias dj=django-admin
+
 alias ip='python -m IPython'
 alias ip3='python3 -m IPython'
 alias ip2='python2 -m IPython'
