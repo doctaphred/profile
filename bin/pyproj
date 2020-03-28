@@ -2,13 +2,14 @@
 IFS=$'\n\t'
 
 project_name=$1
+package_name=$(<<<"$1" tr ' -' '__' | tr '[:upper:]' '[:lower:]')
 
 echo "Initializing project '${project_name}'..."
 
 mkdir "$project_name"
 cd "$project_name"
 
-mkdir -p requirements "src/${project_name}" tests
+mkdir -p requirements "src/${package_name}" tests
 
 cat <<EOF > setup.py
 from setuptools import find_packages, setup
@@ -31,9 +32,10 @@ setup(
 )
 EOF
 
-touch "src/${project_name}/__init__.py"
+touch "src/${package_name}/__init__.py"
+touch "src/${package_name}/__main__.py"
 
-cat <<EOF > "src/${project_name}/main.py"
+cat <<EOF > "src/${package_name}/main.py"
 def function_with_doctests():
     """These should be picked up by pytest.
 
@@ -52,7 +54,7 @@ def function_with_doctests():
     pass
 EOF
 
-cat <<EOF > "tests/test_${project_name}.py"
+cat <<EOF > "tests/test_${package_name}.py"
 import pytest
 
 
