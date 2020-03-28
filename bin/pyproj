@@ -11,6 +11,10 @@ cd "$project_name"
 
 mkdir -p requirements "src/${package_name}" tests
 
+cat <<EOF > README.md
+# $project_name
+EOF
+
 cat <<EOF > setup.py
 from setuptools import find_packages, setup
 
