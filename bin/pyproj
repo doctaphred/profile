@@ -280,7 +280,6 @@ source venv/bin/activate
 EOF
 
 
-make clean
 # Temporarily fill in these files so we can set up the venv and pin
 # them.
 cp requirements/dev.in requirements/dev.txt
@@ -296,5 +295,5 @@ git add .
 git commit -m "Initial commit, via pyproj"
 
 echo
-echo "All set!"
+echo "Project '$project_name' successfully created!"
 echo
