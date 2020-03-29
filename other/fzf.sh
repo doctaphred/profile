@@ -40,7 +40,9 @@ export FZF_CTRL_R_OPTS='
 # Press enter to open selection with less
 alias fzl='fzf --bind "enter:execute(less {})"'
 # Press tab to open selection with bat
-alias fzb='fzf --bind "tab:execute(bat --paging=always {})"'
+alias fzb='fzf --bind "tab:execute(bat --paging=always --pager=less {})"'
+# TODO: when/why does bat require `--pager=less` to avoid exiting at the
+# end of the file (as if it's using `less -FX`)?
 
 pbcrp() {
     # "pasteboard copy relative path"
