@@ -74,7 +74,7 @@ pbcf() {
 fd0() {
     # Run fd and exit 0, even if fd's output pipe closes before it's
     # finished. (Only seems to matter in pipelines; not in subshells.)
-    fd $@ || true
+    fd "$@" || true
 }
 
 alias fd-home='fd0 . ~'
@@ -129,11 +129,11 @@ jump() {
 
     # `cd` with no args defaults to $HOME, but `cd <empty string>` is a
     # no-op: if the subshell's command gives no output, nothing happens.
-    cd "$(fzd $@)"
+    cd "$(fzd "$@")"
 }
 
 jump-all() {
-    cd "$(fzd-all $@)"
+    cd "$(fzd-all "$@")"
 }
 
 # Jump (home)
