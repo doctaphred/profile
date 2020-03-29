@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+import sys
+from xml.etree.ElementTree import parse
+
+for path in sys.argv[1:] or [sys.stdin]:
+    etree = parse(path if path != '-' else sys.stdin)
+    for e in etree.iter():
+        if 'href' in e.attrib:
+            print(e.attrib['href'])
