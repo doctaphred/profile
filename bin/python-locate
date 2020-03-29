@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Locate the specified modules.
+
+for module in $@; do
+    python -c "import $module; print($module.__file__)"
+done

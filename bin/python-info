@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Print info about the specified modules.
+
+echo "$(python --version 2>&1) ($(which python))"
+echo
+
+for module in $@; do
+	python <<-EOF || true
+		import $module
+		print("{0.__name__} {0.__version__}".format($module))
+		print("file: {}".format($module.__file__))
+		print("package: {}".format($module.__package__))
+		print("path: {}".format(getattr($module, '__path__', None)))
+	EOF
+	echo
+done
