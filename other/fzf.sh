@@ -158,7 +158,7 @@ jp() {
     # Jump to project (no subdirectories).
     cd "$(
         cd ~/dev &&
-        fd --follow --type=directory --max-depth=1 |
+        fd --follow --type=directory --max-depth=4 |
         fzp "$@"
     )"
 }
@@ -167,7 +167,7 @@ sp() {
     # Jump to project and edit in Sublime.
     local path="$(
         cd ~/dev &&
-        fd --follow --type=directory --max-depth=1 |
+        fd --follow --type=directory --max-depth=2 |
         fzp "$@"
     )"
     if test -n "$path"; then
