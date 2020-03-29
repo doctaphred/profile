@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Command to work with iTerm's "Semantic History".
+#
+# Expects args to be `\5 \1`, as documented:
+#
+#    In this mode semantic history will be activated on any click, even
+#    if you click on something that is not an existing file.
+#
+#    You can provide substitutions as follows:
+#      \1 will be replaced with the filename.
+#      \2 will be replaced with the line number.
+#      \3 will be replaced with the text before the click.
+#      \4 will be replaced with the text after the click.
+#      \5 will be replaced with the working directory.
+#
+#    This is also an interpolated string evaluated in the context of the
+#    current session. In addition to the usual variables, the following
+#    substitutions are available:
+#      \(semanticHistory.path) will be replaced with the filename.
+#      \(semanticHistory.lineNumber) will be replaced with the line number.
+#      \(semanticHistory.columnNumber) will be replaced with the column number.
+#      \(semanticHistory.prefix) will be replaced with the text before the click.
+#      \(semanticHistory.suffix) will be replaced with the text after the click.
+#      \(semanticHistory.workingDirectory) will be replaced with the working directory.
+#
+# (`\2` appears to be unreliable, and so is not used.)
+
+dir="$1"
+path="$2"
+
+echo "dir='$dir'"
+echo "path='$path'"
+
+cd "$dir"
+
+if test -e "$path"; then
+    # open --reveal "$path"
+    open -a "Sublime Text" "$path"
+else
+    # Assume it's a URL.
+    open -a Firefox.app "$path"
+fi
