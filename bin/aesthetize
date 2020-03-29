@@ -10,9 +10,9 @@ def backtick(word):
     return ' '.join(f'`{letter}`' for letter in word)
 
 
-def aesthetic(words, *, sep=' ' * 3):
+def aesthetize(words, *, sep=' ' * 3):
     """
-    >>> aesthetic(['ayy', 'lmao'])
+    >>> aesthetize(['ayy', 'lmao'])
     '`a` `y` `y`   `l` `m` `a` `o`'
     """
     return sep.join(backtick(word) for word in words)
@@ -22,4 +22,4 @@ _, *words = sys.argv
 if not words:
     words = ''.join(input()).split()
 
-print(aesthetic(words), end='')
+print(aesthetize(words), end='')
