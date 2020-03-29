@@ -18,8 +18,8 @@ alias e=edit
 # `enable -n`.)
 alias time='/usr/bin/env time'
 
-alias ag='ag --smart-case --pager "less -R -S"'
-alias aga='ag --smart-case --pager "less -R -S" --skip-vcs-ignores'
+alias ag="ag --pager 'bat --plain'"
+alias aga='ag --all-types --hidden'
 alias agp='ag --py'
 alias agj='ag --js'
 
