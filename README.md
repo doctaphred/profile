@@ -56,6 +56,9 @@ From `man bash`:
         but  the value of the PATH variable is not used to search for the file-
         name.
 
+Note that, by default, most macOS terminals open new shells as login
+shells, but most Linux terminals do not.
+
 Also from `man bash`:
 
         BUGS
