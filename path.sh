@@ -18,6 +18,12 @@ unuse () {
     PATH="${PATH#*:}"
 }
 
+# GNU find, locate, updatedb, and xargs
+# use /usr/local/opt/findutils/libexec gnubin
+
+# Prefer Homebrew openssl.
+use "/usr/local/opt/openssl@1.1"
+
 # Systemd shell executable directory
 use ~/.local
 
