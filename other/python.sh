@@ -26,6 +26,7 @@ venv-dev () {
 }
 
 alias dj=django-admin
+alias djr='django-admin runserver'
 
 alias ip='python -m IPython'
 alias ip3='python3 -m IPython'
