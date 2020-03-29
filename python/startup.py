@@ -118,10 +118,7 @@ except ImportError:
 
 finish = dt.now()
 
-print("Imports took ", finish - start)
-
-
-nan = NaN = float('nan')
+print("Imports took {}".format(finish - start))
 
 
 # Path to executable
