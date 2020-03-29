@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""Print a character specified by tags."""
+
+raw = """
+! exclamation excl bang
+" quote quot
+# number hash hashtag
+$ dollar
+% percent percnt
+& ampersand amp and
+' apostrophe apos
+'`' grave backtick
+( lparen lpar
+) rparen rpar
+* asterisk ast star
++ plus
+, comma
+- hyphen minus dash
+. period dot
+/ slash solidus sol
+: colon
+? question quest
+\\ backslash bs
+\r return cr
+\t tab
+\x00 null
+\x07 bell
+\x08 backspace
+\x1b escape
+© copyright copy
+® reg
+° degree deg
+² sup2 squared
+³ sup3 cubed
+µ mu micro
+½ half
+¿ lquest
+™ tm
+☃ snowman
+💩 poo poop
+🤔 think
+"""
+lines = [line.split(' ') for line in raw.split('\n') if line]
+lines.extend([
+    ['\n', 'linefeed', 'lf', 'newline'],
+    [' ', 'space'],
+])
+
+
+forward = {}
+reverse = {}
+for char, *tags in lines:
+    assert char not in forward, char
+    forward[char] = set(tags)
+    for tag in tags:
+        reverse.setdefault(tag, set()).add(char)
+
+
+def match(tags):
+    # Ignore unknown tags.
+    candidates = [reverse[tag] for tag in tags if tag in reverse]
+    return set.intersection(*candidates)
+
+
+if __name__ == '__main__':
+    import sys
+    from subprocess import run
+
+    def log(*args):
+        print(*args, file=sys.stderr, flush=True)
+
+    usage = f"Usage: {__file__} <tag>..."
+
+    if '-h' in sys.argv or '--help' in sys.argv:
+        print(__doc__)
+        print()
+        print(usage)
+        raise SystemExit(0)
+
+    _, *tags = sys.argv
+
+    if not tags:
+        log(usage)
+        raise SystemExit(1)
+
+    matches = match(tags)
+
+    if len(matches) != 1:
+        log(f"error: {len(matches)} matches for {tags}")
+        raise SystemExit(1)
+
+    char = matches.pop()
+
+    if char.isspace() or not char.isprintable():
+        log(repr(char))
+    print(char)
+
+    run('pbcopy', input=char, text=True)
