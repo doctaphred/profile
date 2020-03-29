@@ -38,6 +38,7 @@ alias pycharm='open -a "PyCharm CE"'
 alias pipdev='pip install -r ~/profile/python/requirements-dev.in'
 alias pyformat='python -c "help(\"FORMATTING\")"'
 
+alias pm='python -m'
 alias pdb='python -m pdb -c continue'
 alias pdbm='python -m pdb -c continue -m'
 
