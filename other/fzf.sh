@@ -62,7 +62,9 @@ pbcp() {
 
 pbcf() {
     # "pasteboard copy file"
-    local path="$(
+    local path
+    # TODO: skip fzf if the path exists
+    path="$(
         fd0  --type=file --color=always --hidden --no-ignore |
         fzp "$@"
     )"
