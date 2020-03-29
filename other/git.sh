@@ -147,6 +147,13 @@ ghcl-multi-org() {
     xargs -n1 -P32 -I% git clone "git@github.com:$1/%.git"
 }
 
+git-bump() {
+    pushd "$1"
+    git checkout master
+    git pull
+    popd
+}
+
 pghcl() {
     # Personal GitHub clone
     # Make sure github-personal is defined as a Host in ~/.ssh/config,
