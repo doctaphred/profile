@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Create a new executable file next to this one, and open it for editing.
+
 dir="$(dirname "$0")"
 
 case $# in
