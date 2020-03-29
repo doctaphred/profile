@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Transform the pasteboard contents."""
+import sys
+from subprocess import run
+
+
+registered = {}
+
+
+def register(f):
+    registered[f.__name__] = f
+    return f
+
+
+@register
+def preview(text, n=10):
+    if len(text) < n:
+        return text
+    else:
+        return text[:n] + '…'
+
+
+def aesthetize_word(word):
+    """
+    >>> aesthetize('aesthetic')
+    '`a` `e` `s` `t` `h` `e` `t` `i` `c`'
+    """
+    return ' '.join(f'`{letter}`' for letter in word)
+
+
+@register
+def aesthetize(text):
+    sanitized = text.replace('`', '')
+    words = sanitized.split()
+    aesthetized = map(aesthetize_word, words)
+    return '   '.join(aesthetized)
+
+
+if __name__ == '__main__':
+    if '-h' in sys.argv or '--help' in sys.argv:
+        print(__doc__)
+        raise SystemExit(0)
+
+    try:
+        _, name = sys.argv
+    except ValueError:
+        print(f"Usage: {__file__} <name>", file=sys.stderr)
+        raise SystemExit(1)
+
+    transformer = registered[name]
+
+    before = run('pbpaste', capture_output=True, text=True).stdout
+    after = transformer(before)
+    run('pbcopy', input=after, text=True)
+
+    before_preview = preview(before)
+    after_preview = preview(after, 40)
+
+    print(f"{before_preview!r} -> {after_preview!r}", file=sys.stderr)
