@@ -13,11 +13,11 @@ def register(f):
 
 
 @register
-def preview(text, n=10):
-    if len(text) < n:
-        return text
+def preview(text, max_len=10):
+    if len(text) > max_len:
+        return text[:max_len-1] + '…'
     else:
-        return text[:n] + '…'
+        return text
 
 
 def aesthetize_word(word):
