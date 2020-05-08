@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+host=$1
+user=$2
+
+mount_dir=~/sshfs/"$host/$user"
+mkdir -p "$mount_dir"
+sshfs "$user@$host:" "$mount_dir"
+open "$mount_dir"
