@@ -70,15 +70,15 @@ unset path
 # direnv: https://github.com/direnv/direnv
 eval "$(direnv hook bash)"
 
+# bash completion: `brew install bash-completion`
+# XXX: This might be slow...
+# XXX: Exits 1 if it is sourced before iTerm shell integration:
+# that probably means something bad is happening.
+try include "/usr/local/etc/profile.d/bash_completion.sh"
+
 # iTerm shell integration
 try include ~/profile/iterm/iterm2_shell_integration.bash
 
 # Now that we're done with setup, disable errexit so failed commands
 # don't quit the interactive shell.
-#
-# TODO: figure out why the bash completion script below encounters an error.
 set +e
-
-# bash completion: `brew install bash-completion`
-# XXX: This might be slow...
-include "/usr/local/etc/profile.d/bash_completion.sh"
