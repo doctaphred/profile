@@ -67,7 +67,7 @@ unset path
 eval "$(direnv hook bash)"
 
 # iTerm shell integration
-include ~/.iterm2_shell_integration.bash
+try include ~/profile/iterm/iterm2_shell_integration.bash
 
 # Now that we're done with setup, disable errexit so failed commands
 # don't quit the interactive shell.
