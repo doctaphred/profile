@@ -71,12 +71,6 @@ vv() {
 }
 
 
-lsd() {
-    # List directories
-    ls -F "$@" | grep '/$'
-}
-
-
 mergeout() {
     # Run the command, merging stderr to stdout.
     # Also consider `|&` (pipe both stdout and stderr)
