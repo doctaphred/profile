@@ -11,7 +11,8 @@ use () {
     # TODO: MANPATH?
     dir="$1"
     bindir="${2-bin}"
-    PATH="$(realpath "$dir/$bindir"):$PATH"
+    path="$(realpath "$dir/$bindir")"
+    PATH="$path:$PATH"
 }
 
 unuse () {
