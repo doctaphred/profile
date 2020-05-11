@@ -73,7 +73,7 @@ vv() {
 
 lsd() {
     # List directories
-    ls -F "$@" | grep \/$
+    ls -F "$@" | grep '/$'
 }
 
 
