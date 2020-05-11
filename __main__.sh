@@ -4,6 +4,10 @@
 
 # Style guide: https://google.github.io/styleguide/shell.xml
 
+# Exit immediately if not interactive.
+# (Prevents strange errors from scp et al.)
+[[ $- != *i* ]] && return
+
 set -e  # Exit immediately if there's an error.
 
 # XXX: Many external scripts rely on the 'nounset' (`set -u`) option to
