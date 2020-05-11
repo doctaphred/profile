@@ -23,7 +23,7 @@ unuse () {
 # use /usr/local/opt/findutils/libexec gnubin
 
 # Prefer Homebrew openssl.
-use "/usr/local/opt/openssl@1.1"
+# use "/usr/local/opt/openssl@1.1"
 
 # Systemd shell executable directory
 use ~/.local
