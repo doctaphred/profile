@@ -26,6 +26,12 @@ maybe() {
 }
 
 
+try() {
+    # Execute the command without erroring.
+    "$@" || true
+}
+
+
 take() {
     # mkdir, then cd into it. Surprisingly useful.
     mkdir -p $1

@@ -26,9 +26,9 @@ unuse () {
 # use "/usr/local/opt/openssl@1.1"
 
 # Systemd shell executable directory
-use ~/.local
+try use ~/.local
 
 # My personal executables (nonstandard locations)
-use ~
-use ~/profile
-use ~/stuff
+try use ~
+try use ~/profile
+# try use ~/stuff
