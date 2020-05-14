@@ -16,7 +16,7 @@ include-all() {
 
 exists() {
     # Check if the command(s) exist(s)
-    type $@ >/dev/null 2>&1
+    type "$@" >/dev/null 2>&1
 }
 
 
@@ -59,7 +59,7 @@ OLDPWD=~
 
 v() {
     # "View"
-    less $@
+    less "$@"
 }
 
 
@@ -67,7 +67,7 @@ vv() {
     # View the command's stdout and stderr in less.
     # Don't preprocess with pygmentize or other syntax highlighter,
     # since it will likely not work. (Also it's slow.)
-    $@ 2>&1 | less --no-lessopen
+    "$@" 2>&1 | less --no-lessopen
 }
 
 
