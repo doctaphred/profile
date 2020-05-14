@@ -10,9 +10,6 @@ alias la='ls -Ab'
 alias ll='ls -AbelGhiOT'
 alias lll='ls -@AbelGhiOT'  # Include extended attributes (multiple lines)
 
-alias edit='subl --new-window'
-alias e=edit
-
 # The bash keyword 'time' occludes the actual 'time' program; only the
 # latter has the handy -l option. (bash keywords can't be disabled via
 # `enable -n`.)

@@ -53,12 +53,13 @@ prohibit-subshells () {
 prohibit-subshells  # Just in case!
 
 # Source these files in this specific order.
-source "$PROFILE/options.sh"
+source "$PROFILE/shopt.sh"
 source "$PROFILE/env.sh"
-source "$PROFILE/aliases.sh"
 source "$PROFILE/functions.sh"
 source "$PROFILE/path.sh"
 source "$PROFILE/prompt.sh"
+source "$PROFILE/settings.sh"
+source "$PROFILE/aliases.sh"
 
 # Source these files in arbitrary order.
 # TODO: is this okay if paths contain spaces?

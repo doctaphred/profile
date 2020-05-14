@@ -112,3 +112,34 @@ prompt="${bold}\\\$${reset}"
 
 PS0="\n$timestamp\n\n"
 PS1="\n$timestamp\n$errinfo\n$myinfo $workdir 🐍 $pyinfo $gitinfo $stashinfo\n$prompt "
+
+
+# ls-after-cd, inspired by http://pastebin.com/VBSQJyeA
+# Insert into PROMPT_COMMAND
+__prev_wd="$PWD"
+_ls_new_wd() {
+    [[ $__prev_wd != "$PWD" ]] && ls
+    __prev_wd="$PWD"
+}
+
+# https://debian-administration.org/article/543/Bash_eternal_history
+__prev_hist="$(history 1)"
+_eternal_history() {
+    local __hist
+    __hist="$(history 1)"
+    if [[ "$__prev_hist" != "$__hist" ]]; then
+        echo $$ "$USER" "$__hist" >> ~/.bash_eternal_history
+        __prev_hist="$__hist"
+    fi
+}
+
+_prompt_command() {
+    # Append history lines from this session to the history file
+    history -a
+    # Append last history command to custom "eternal history" file
+    _eternal_history
+    # List directory contents if we're in a new working directory
+    _ls_new_wd
+}
+
+PROMPT_COMMAND="_prompt_command; $PROMPT_COMMAND"
