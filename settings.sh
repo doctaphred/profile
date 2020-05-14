@@ -11,11 +11,11 @@ HISTTIMEFORMAT="%F %T "
 
 editor () {
     if exists code; then
-        echo 'code'
+        echo 'code --new-window --wait'
     elif exists subl; then
-        echo 'subl --new-window'
+        echo 'subl --new-window --wait'
     elif exists rmate; then
-        echo 'rmate'
+        echo 'rmate --new-window --wait'
     else
         echo 'nano'  # Don't @ me.
     fi
