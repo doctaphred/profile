@@ -3,7 +3,7 @@ pdb++ configuration
 
 Symlink this file to ~/.pdbrc.py and pdb++ will pick it up:
 
-    ln -s ~/profile/python/pdbrc.py ~/.pdbrc.py
+    ln -s "$PROFILE/python/pdbrc.py" ~/.pdbrc.py
 """
 import pdb
 

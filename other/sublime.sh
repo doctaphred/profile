@@ -16,5 +16,3 @@ proj() {
         fi
     )
 }
-
-alias prof='proj profile'

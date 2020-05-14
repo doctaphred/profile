@@ -34,5 +34,5 @@ try use ~/.local
 
 # My personal executables (nonstandard locations)
 try use ~
-try use ~/profile
+try use "$PROFILE"
 # try use ~/stuff

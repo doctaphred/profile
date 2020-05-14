@@ -12,6 +12,8 @@ existing .bash_profile and .bashrc, and run the following commands:
     echo 'source ~/.bashrc' >> ~/.bash_profile
     echo 'source ~/profile/__main__.sh' >> ~/.bashrc
 
+(Or clone it elsewhere and change the `__main__.sh` path accordingly.)
+
 You might need to upgrade bash in order to use options like `shopt -s autocd`. To do this on macOS:
 
     brew install bash

@@ -1,4 +1,4 @@
-export PYTHONSTARTUP=~/profile/python/startup.py
+export PYTHONSTARTUP="$PROFILE/python/startup.py"
 # YES I UNDERSTAND THAT PYTHON 2.7 WILL REACH THE END OF ITS LIFE ON
 # JANUARY 1ST, 2020 THANK YOU FOR CONTINUALLY INFORMING ME
 export PYTHONWARNINGS='ignore:DEPRECATION::pip._internal.cli.base_command:'
@@ -35,7 +35,7 @@ alias ip2='python2 -m IPython'
 alias pycharm='open -a "PyCharm CE"'
 
 # Install libraries I use for development in most projects.
-alias pipdev='pip install -r ~/profile/python/requirements-dev.in'
+alias pipdev='pip install -r "$PROFILE/python/requirements-dev.in"'
 alias pyformat='python -c "help(\"FORMATTING\")"'
 
 alias pm='python -m'

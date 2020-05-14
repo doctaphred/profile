@@ -1,5 +1,7 @@
 prohibit-subshells
 
+alias prof='edit "$PROFILE"'
+
 alias please=sudo  # Mind your manners!
 alias pseudo=sudo
 alias nuke='rm -rf'
@@ -21,8 +23,7 @@ alias agp='ag --py'
 alias agj='ag --js'
 
 # alias ~~='subl --project ~/Dropbox/proj/home.sublime-project'
-# alias pr='subl ~/profile'
-
+# alias pr='edit "$PROFILE"'
 
 alias pbc=pbcopy
 alias pbp=pbpaste
