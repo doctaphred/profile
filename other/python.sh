@@ -27,6 +27,9 @@ venv-dev () {
 
 alias dj=django-admin
 alias djr='django-admin runserver'
+alias djsh='django-admin shell'
+alias djmm='django-admin makemigrations'
+alias djm='django-admin migrate'
 
 alias ip='python -m IPython'
 alias ip3='python3 -m IPython'
@@ -42,3 +45,4 @@ alias pm='python -m'
 alias pdb='python -m pdb -c continue'
 alias pdbm='python -m pdb -c continue -m'
 
+alias pyexceptions='less ~/dev/python/cpython/Lib/test/exception_hierarchy.txt'

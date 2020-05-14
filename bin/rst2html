@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+in="$1.rst"
+out="$1.html"
+
+echo "Converting '$in' to '$out'..."
+
+set -x
+
+rst2html.py "$in" >"$out"
+open "$out"

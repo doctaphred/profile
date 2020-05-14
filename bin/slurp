@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+where="${1:-slurp}"
+
+while read url; do
+    mkdir -p "$where/$url"
+    dest="$(realpath "$where/$url/$(date -u +%FT%T)")"
+    >&2 echo "$url"
+    echo "$dest" "$url"
+done | xargs -n2 -P32 curl -fsSL -o
+# done | xargs -n2 -P "$(nproc)" curl -fssL -o

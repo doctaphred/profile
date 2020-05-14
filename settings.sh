@@ -2,8 +2,8 @@ prohibit-subshells
 
 # Better history management, from http://unix.stackexchange.com/a/48113/134011
 HISTCONTROL=ignoreboth:erasedups  # Erase duplicates when writing the history file
-HISTSIZE=100000  # Size of history in memory
-HISTFILESIZE=1000000000  # Size of history file
+HISTSIZE=100000000000  # Size of history in memory
+HISTFILESIZE=100000000000  # Size of history file
 shopt -s histappend  # Append to history, don't overwrite it
 
 HISTTIMEFORMAT="%F %T "

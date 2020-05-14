@@ -10,6 +10,12 @@ join () {
     done
 }
 
+show () {
+    for name in "$@"; do
+        printf '%q=%q' "${name}" "${!name}"
+    done
+}
+
 trim-whitespace () {
     # Remove trailing whitespace of all files recursively.
     # Ignores .git and .svn folders and their contents.

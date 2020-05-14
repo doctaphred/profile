@@ -1,0 +1,19 @@
+#!/usr/bin/env bash -euxo pipefail
+
+# A nicer way to download files from s3, preserving their prefixes.
+#
+# Args:
+# $1: local base directory
+# $2: prefix (including bucket name)
+#
+# Additional args are forwarded to the `aws s3 sync` command.
+#
+# Default forwarded args include `--exclude '*'`, so you **must**
+# provide `--include` and a value in order to do anything.
+# (Use `--include '*'` to download all contents.)
+
+set -x
+mkdir -p "$1/$2/"
+# Include the full prefix -- not just the bucket name -- in the s3 url,
+# to avoid horrendously slow performance for large buckets.
+aws s3 sync "s3://$2/" "$1/$2/" --exclude '*' "$@"

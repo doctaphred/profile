@@ -6,5 +6,5 @@ require 'bigdecimal'
 
 ARGV.each do |t|
     # `Time.strptime(t, "%s")` ignores fractional seconds
-   puts Time.at(BigDecimal.new(t)).strftime "%Y-%m-%dT%H:%M:%S.%3NZ"
+   puts Time.at(BigDecimal(t)).strftime "%Y-%m-%dT%H:%M:%S.%3NZ"
 end

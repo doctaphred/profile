@@ -17,6 +17,8 @@ alias lll='ls -@AbelGhiOT'  # Include extended attributes (multiple lines)
 # `enable -n`.)
 alias time='/usr/bin/env time'
 
+alias lessq='less --quit-if-one-screen --no-init'
+
 alias ag="ag --pager 'bat --plain'"
 alias aga='ag --all-types --hidden'
 alias agp='ag --py'
@@ -30,3 +32,5 @@ alias pbp=pbpaste
 alias pbr='printf 🍺'
 
 alias gimp='open -a GIMP-2.10.app'
+
+icloud='cd ~/"Library/Mobile Documents/com~apple~CloudDocs"'
