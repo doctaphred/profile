@@ -189,6 +189,19 @@ git-set-origin-ssh() {
     git remote add origin "git@github.com:doctaphred/${PWD##*/}.git"
 }
 
+git-mirror() {
+    netloc="$1"
+    path="$2"
+    dest="$HOME/git/$netloc/$path"
+
+    mkdir -p "$dest"
+    git clone "git@$netloc:$path.git" "$dest"
+    cd "$dest"
+    git submodule update --recursive --init
+}
+
+alias github-mirror="git-mirror github.com"
+
 alias such=git
 alias very=git
 alias much=git
