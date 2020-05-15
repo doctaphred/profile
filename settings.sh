@@ -10,10 +10,10 @@ HISTTIMEFORMAT="%F %T "
 
 
 editor () {
-    if exists code; then
-        echo 'code --new-window --wait'
-    elif exists subl; then
+    if exists subl; then
         echo 'subl --new-window --wait'
+    elif exists code; then
+        echo 'code --new-window --wait'
     elif exists rmate; then
         echo 'rmate --new-window --wait'
     else
