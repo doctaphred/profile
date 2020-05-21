@@ -200,7 +200,9 @@ git-mirror() {
     git submodule update --recursive --init
 }
 
-alias github-mirror="git-mirror github.com"
+github-mirror() {
+    git-mirror "github.com" "$1/$2"
+}
 
 alias such=git
 alias very=git
