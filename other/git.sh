@@ -3,9 +3,11 @@ prohibit-subshells
 # Aliases and functions for working with Git and GitHub
 
 alias gs='git status'
+
 alias gsh='git show'
 alias gshn='git show --name-only'
 alias gsn='git show --name-only'
+
 alias gst='git stash'
 alias gsta='git stash --include-untracked'
 alias gsts='git stash show --patch'  # --patch: Show diff, not just names
@@ -15,35 +17,48 @@ alias gstp='git stash pop'
 alias gstcl='git stash clear'
 alias gstd='git stash drop'
 alias gsp='git stash pop'
+
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gdn='git diff --name-only'
 alias gdno='git diff --name-only'
+
 alias gb='git branch'
 alias gbd='git branch --delete'
+alias gbD='git branch --delete --force'
+
 alias gc='git commit --verbose'
 alias gca='git commit --amend'
 alias regc='git commit --amend'
+
 alias gch='git checkout'
+alias gchp='git checkout -'
 alias g-='git checkout -'
-alias gcb='git checkout -b'
+alias gch-='git checkout -'
 alias gchb='git checkout -b'
+
 alias gr='git reset'
 alias grs='git reset --soft'
 alias gf='git fetch'
+
 # `git config --global rebase.autoStash true` makes this much nicer
 alias gpr='git pull --rebase'
+
 alias gpu='git push'  # Remember to `git config --global push.default current`
 alias gpuf='git push --force-with-lease'
 alias yeet='git push --force-with-lease'
 alias YEET='git push --force --no-verify'
+
 alias gsu='git submodule update'
 alias gsur='git submodule update --recursive'
 alias gsui='git submodule update --init'
 alias gsuir='git submodule update --init --recursive'
 alias gsuri='git submodule update --recursive --init'
+
 alias gg='git grep'
+
 alias grim='git rebase --interactive master'
+
 alias gcl='git clone'
 
 git-in() {
