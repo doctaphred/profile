@@ -1,6 +1,8 @@
 # Make gcc use Homebrew openssl
-# export LDFLAGS=-L/usr/local/opt/openssl/lib
-# export CFLAGS=-I/usr/local/opt/openssl/include
+if test -d /usr/local/opt/openssl; then
+	export LDFLAGS=-L/usr/local/opt/openssl/lib
+	export CFLAGS=-I/usr/local/opt/openssl/include
+fi
 
 # XXX: Don't do this: way too many projects assume that if you're using
 # macOS, you're using clang.
