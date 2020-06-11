@@ -91,3 +91,9 @@ clean-shell() {
     # Set TERM=xterm because programs like less complain if you don't.
     env -i TERM=xterm $SHELL --norc --noprofile
 }
+
+
+icloud() {
+    cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+}
+alias ic=icloud
