@@ -11,11 +11,11 @@ HISTTIMEFORMAT="%F %T "
 
 editor () {
     if exists subl; then
-        echo 'subl --new-window --wait'
+        echo 'subl'
     elif exists code; then
-        echo 'code --new-window --wait'
+        echo 'code'
     elif exists rmate; then
-        echo 'rmate --new-window --wait'
+        echo 'rmate'
     else
         echo 'nano'  # Don't @ me.
     fi
@@ -27,7 +27,7 @@ edit () {
 alias e=edit
 
 export EDITOR="vim"
-export VISUAL="$(editor)"
+export VISUAL="$(editor) --new-window --wait"
 
 # Enable ls colors
 export CLICOLOR=1
