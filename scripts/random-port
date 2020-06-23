@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+"""Print a randomly chosen ephemeral port number.
+
+See https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+"""
+import random
+print(random.randint(49152, 65535), end='')
