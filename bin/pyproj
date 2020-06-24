@@ -130,7 +130,7 @@ EOF
 
 cat <<EOF > tox.ini
 [tox]
-envlist = {py36,py37}
+envlist = {py36,py37,py38}
 
 [testenv]
 commands =
