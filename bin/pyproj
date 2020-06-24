@@ -82,7 +82,7 @@ test: venv
 	venv/bin/pytest
 
 lint: venv
-	venv/bin/flake8 *.py src tests
+	venv/bin/flake8
 
 # Create a virtualenv with all requirements installed.
 venv:
@@ -148,7 +148,7 @@ addopts =
 testpaths = src tests
 
 [flake8]
-# TODO: specify flake8 paths here instead of Makefile
+filename = ./setup.py,./src/*.py,./tests/*.py
 EOF
 
 
