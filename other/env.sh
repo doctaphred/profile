@@ -60,12 +60,12 @@ load-all () {
 list-names () {
     local env_files file name
     if ! test -d "$ENV_DIR"; then
-        err "env directory not found at $(realpath "$ENV_DIR")"
+        err "env directory not found at $ENV_DIR"
         return 1
     fi
     env_files=$(find "$ENV_DIR" -name "*$ENV_SUFFIX")
     if ! test "$env_files"; then
-        warn "no .env files found in $(realpath "$ENV_DIR")"
+        warn "no .env files found in $ENV_DIR"
         return 0
     fi
     # Don't read lines with `for`, to avoid strange bugs.
