@@ -37,8 +37,8 @@ load () {
     if valid-name "$name"; then
         file=$ENV_DIR/$name$ENV_SUFFIX
         info "loading $name from $file"
-        # The bash syntax `$(<file)` is equivalent to `$(cat file)`.
-        export $name=$(<"$file")
+        export $name=$(<"$file")  # Load contents of file.
+        # Note: The bash syntax `$(<file)` is equivalent to `$(cat file)`.
     else
         err "'$name' is not a valid variable name."
         log "  Variable names must start with an underscore or letter,"
@@ -89,7 +89,7 @@ print-exports () {
     local name file value
     for name in $(list-names); do
         file=$ENV_DIR/$name$ENV_SUFFIX
-        value=$(<"$file")
+        value=$(<"$file")  # Load contents of file.
         printf 'export %s=%q\n' "$name" "$value"
     done
 }
