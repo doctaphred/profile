@@ -9,7 +9,7 @@ true ${ENV_SUFFIX=.env}
 true ${ENV_LOG=1}
 
 # Print a message to stderr.
-log () { >&2 printf '%s\n' "$*"; }
+log () { >&2 printf '[%s] %s\n' "${BASH_SOURCE[0]}" "$*"; }
 
 # Log in bold red.
 err () { log "$(tput bold)$(tput setaf 1)Error: $*$(tput sgr0)"; }
