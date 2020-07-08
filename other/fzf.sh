@@ -157,7 +157,7 @@ alias jl='jump .'
 alias jal='jump .'
 
 jp() {
-    # Jump to project (no subdirectories).
+    # Jump to project.
     cd "$(
         cd ~/dev &&
         fd --follow --type=directory --max-depth=4 |
