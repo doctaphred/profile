@@ -219,6 +219,11 @@ github-mirror() {
     git-mirror "github.com" "$1/$2"
 }
 
+# Toggle whether a directory "is" a git repo, to temporarily avoid strange
+# interactions with external tools.
+ungit() { mv -v -i .git ..git; }
+regit() { mv -v -i ..git .git; }
+
 alias such=git
 alias very=git
 alias much=git
