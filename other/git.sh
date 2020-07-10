@@ -63,10 +63,8 @@ alias gcl='git clone'
 
 git-in() {
     # Perform a git command in the given directory.
-    # (Assumes the git directory is `.git` within the work tree.)
-    dir="$1"
-    shift
-    git --git-dir="$dir/.git" --work-tree="$dir" "$@"
+    >&2 echo 'Deprecated: use `git -C <dir>`'
+    return 1
 }
 
 git-name() {
