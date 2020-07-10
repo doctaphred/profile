@@ -34,8 +34,8 @@ try() {
 
 take() {
     # mkdir, then cd into it. Surprisingly useful.
-    mkdir -p $1
-    cd $1
+    mkdir -p "$1"
+    cd "$1"
 }
 
 tktemp() {
@@ -89,7 +89,7 @@ clean-shell() {
     # Open a subshell without inheriting env vars (-i),
     # and without sourcing .bashrc or .bash_profile.
     # Set TERM=xterm because programs like less complain if you don't.
-    env -i TERM=xterm $SHELL --norc --noprofile
+    env -i TERM=xterm "$SHELL" --norc --noprofile
 }
 
 
