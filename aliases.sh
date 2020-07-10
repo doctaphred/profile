@@ -11,6 +11,10 @@ alias cp='cp -v -i'
 alias mv='mv -v -i'
 alias rm='rm -v -i'
 
+# The `trash` program *claims* it uses Finder by default, but actually doesn't.
+# See http://hasseg.org/trash/, https://github.com/ali-rantakari/trash
+alias trash='trash -F'
+
 alias please=sudo  # Mind your manners!
 alias pseudo=sudo
 alias nuke='rm -rf'
