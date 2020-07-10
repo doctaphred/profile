@@ -202,6 +202,14 @@ git-set-origin-ssh() {
     git remote add origin "git@github.com:doctaphred/${PWD##*/}.git"
 }
 
+# Recursively find git work trees in the current directory.
+git-repos() {
+    # The presence of either a `.git` file *or* directory can indicate a git
+    # directory. (See `--separate-git-dir`, `--git-dir`, and `$GIT_DIR`.)
+    find . -name .git -execdir pwd \;
+}
+
+# Clone a git repo into a directory matching its URL.
 git-mirror() {
     netloc="$1"
     path="$2"
@@ -211,6 +219,12 @@ git-mirror() {
     git clone "git@$netloc:$path.git" "$dest"
     cd "$dest"
     git submodule update --recursive --init
+}
+
+# Run `git fetch` in all mirrored git repos.
+git-mirror-refresh() {
+    # TODO: parallelize
+    find "$HOME/git" -name .git -execdir pwd \; -execdir git fetch -v \;
 }
 
 github-mirror() {
