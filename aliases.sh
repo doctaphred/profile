@@ -2,6 +2,15 @@ prohibit-subshells
 
 alias prof='edit "$PROFILE"'
 
+# Make dangerous commands less dangerous.
+# -v: Log actions actually taken.
+# -i: Request confirmation before deleting/overwriting.
+# See also -n: Don't overwrite existing files.
+#   (-n causes cp to exit 1 if overwrites are prevented, but not mv (?!?).)
+alias cp='cp -v -i'
+alias mv='mv -v -i'
+alias rm='rm -v -i'
+
 alias please=sudo  # Mind your manners!
 alias pseudo=sudo
 alias nuke='rm -rf'
