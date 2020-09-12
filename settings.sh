@@ -8,26 +8,8 @@ shopt -s histappend  # Append to history, don't overwrite it
 
 HISTTIMEFORMAT="%F %T "
 
-
-editor () {
-    if exists subl; then
-        echo 'subl'
-    elif exists code; then
-        echo 'code'
-    elif exists rmate; then
-        echo 'rmate'
-    else
-        echo 'nano'  # Don't @ me.
-    fi
-}
-
-edit () {
-    $(editor) "$@"
-}
-alias e=edit
-
-export EDITOR="vim"
-export VISUAL="$(editor) --new-window --wait"
+export EDITOR=edit
+export VISUAL=edit
 
 # Enable ls colors
 export CLICOLOR=1

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Open the best available editor.
+
+if type subl; then
+    subl --new-window --wait "$@"
+elif type rmate; then
+    rmate "$@"
+else
+    nano "$@"
+fi
