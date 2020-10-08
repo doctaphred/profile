@@ -66,6 +66,10 @@ errinfo () {
     esac
 }
 
+myinfo () {
+    echo -n "$(whoami)@$(hostname -s)"
+}
+
 pyinfo () {
     python <<-EOF
 		from __future__ import print_function
@@ -103,7 +107,7 @@ stashinfo () {
 
 timestamp="${bold_black}\D{%Y-%m-%d %H:%M:%S %Z}${reset}"
 errinfo="${bold_red}\$(errinfo)${reset}"
-myinfo="${bold_green}\u@\H${reset}"
+myinfo="${bold_green}\$(myinfo)${reset}"
 workdir="${bold_blue}\w${reset}"
 pyinfo="${bold_cyan}\$(pyinfo)${reset}"
 gitinfo="${bold_purple}\$(gitinfo)${reset}"
