@@ -57,6 +57,7 @@ alias gsuri='git submodule update --recursive --init'
 
 alias gg='git grep'
 
+alias gri='git rebase --interactive'
 alias grim='git rebase --interactive master'
 
 alias gcl='git clone'
@@ -93,8 +94,8 @@ gsqn() {
 
 alias gsq='gsqn 1'
 
-gri() {
-    # Git rebase interactive
+grin() {
+    # Git rebase interactive <n>
     git rebase --interactive "HEAD~$1"
 }
 
