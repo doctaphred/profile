@@ -248,6 +248,8 @@ alias amaze='git push'
 # very pull
 # amaze
 
+# git is a blockchain don't @ me
+alias blockchain=git
 
 # bash completion
 include /usr/local/etc/bash_completion.d/git-completion.bash
