@@ -46,3 +46,5 @@ alias pdb='python -m pdb -c continue'
 alias pdbm='python -m pdb -c continue -m'
 
 alias pyexceptions='less ~/dev/python/cpython/Lib/test/exception_hierarchy.txt'
+
+alias pipup='pip install --upgrade pip'
