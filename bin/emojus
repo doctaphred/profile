@@ -7,6 +7,8 @@ See:
 - https://en.wikipedia.org/wiki/Unicode_character_property
 - https://en.wikipedia.org/wiki/Zero-width_joiner
 
+Video demonstration: https://twitter.com/doctaphred/status/1206923229035675648
+
 TODO: visual similarity metrics.
 """
 import sys
