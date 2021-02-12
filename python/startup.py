@@ -116,10 +116,11 @@ try:
 except ImportError:
     pass
 
-
-finish = dt.now()
-
-print("Imports took {}".format(finish - start))
+if 'MORE_PYTHONSTARTUP' in os.environ:
+    for _path in os.getenv('MORE_PYTHONSTARTUP').split(':'):
+        print('running', _path)
+        exec(Path(_path).read_text())
+        del _path
 
 
 # Path to executable
