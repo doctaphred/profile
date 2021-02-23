@@ -56,6 +56,7 @@ import urllib.parse
 import weakref
 import zipfile
 from datetime import datetime, timedelta
+from decimal import Decimal
 from dis import dis
 from os import path
 from pprint import pprint
