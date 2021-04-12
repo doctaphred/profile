@@ -74,6 +74,24 @@ git-name() {
     git name-rev --always --name-only HEAD
 }
 
+git-branches() {
+    # TODO: Improve format.
+    git branch --sort=committerdate --format='%(HEAD) %(color:yellow)%(objectname:short)%(color:reset) %(color:green)%(authorname)%(color:reset) %(color:magenta)%(committerdate:relative)%(color:reset) (%(color:green)%(refname:short)%(color:reset)) %(contents:subject)'
+}
+alias gbs=git-branches
+alias gbv=git-branches
+alias gbb=git-branches
+
+git-merged-branches() {
+    git branch --merged | egrep -v "(^\*|master|main|dev)"
+}
+
+git-delete-merged-branches() {
+    git-merged-branches | xargs git branch --delete
+}
+alias gdmb=git-delete-merged-branches
+alias gbdm=git-delete-merged-branches
+
 git-current-branch() {
     git rev-parse --abbrev-ref HEAD
 }
