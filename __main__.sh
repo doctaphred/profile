@@ -52,6 +52,11 @@ prohibit-subshells () {
 
 prohibit-subshells  # Just in case!
 
+# Get key executables from nix (e.g., realpath) before proceeding.
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
+fi
+
 # Source these files in this specific order.
 source "$PROFILE/shopt.sh"
 source "$PROFILE/env.sh"
