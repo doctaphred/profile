@@ -28,9 +28,9 @@ log () {
 log "Shell: $SHELL ($BASH_VERSION)"
 log "PID: $BASHPID"
 
-# Get the directory containing this script, and resolve any symlinks.
+# Get the directory containing this script.
 # (n.b. `BASH_SOURCE` is an array, but we just want the first element.)
-export PROFILE="$(realpath "$(dirname "$BASH_SOURCE")")"
+export PROFILE=$(dirname "$BASH_SOURCE")
 
 prohibit-subshells () {
 	# Call this function in additional setup scripts to prevent
