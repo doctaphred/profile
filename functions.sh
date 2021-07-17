@@ -3,7 +3,7 @@ prohibit-subshells
 
 include() {
     # Source the file, if it exists
-    test -f "$1" && source "$1"
+    test -f "$1" && source "$1" || true
 }
 
 

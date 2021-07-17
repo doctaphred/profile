@@ -26,7 +26,7 @@ try use "/Applications/Visual Studio Code.app/Contents/Resources/app"
 # GNU find, locate, updatedb, and xargs
 # use /usr/local/opt/findutils/libexec gnubin
 
-use /usr/local/opt/make/libexec gnubin
+# use /usr/local/opt/make/libexec gnubin
 
 # Prefer Homebrew openssl.
 # use "/usr/local/opt/openssl@1.1"
