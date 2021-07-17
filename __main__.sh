@@ -9,6 +9,7 @@
 [[ $- != *i* ]] && return
 
 set -e  # Exit immediately if there's an error.
+set -o emacs  # Fails if readline is not in use.
 
 # XXX: Many external scripts rely on the 'nounset' (`set -u`) option to
 # be *disabled* (the unfortunate default) -- not only when sourcing
