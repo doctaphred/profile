@@ -20,7 +20,6 @@ unuse () {
 }
 
 # macOS applications
-try use "/Library/Frameworks/Python.framework/Versions/3.8"
 try use "/Applications/Visual Studio Code.app/Contents/Resources/app"
 
 # GNU find, locate, updatedb, and xargs
