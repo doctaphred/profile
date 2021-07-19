@@ -22,12 +22,14 @@ venv () {
 
 venv-dev () {
     venv venv "$@"
-    pip install flake8 ipython pp-ez pytest
+    pip install flake8 ipython pp-ez pytest mypy isort tqdm
 }
 
 alias dj=django-admin
 alias djr='django-admin runserver'
 alias djsh='django-admin shell'
+alias djmig='django-admin migrate'
+alias djmkm='django-admin makemigrations'
 alias djmm='django-admin makemigrations'
 alias djm='django-admin migrate'
 
