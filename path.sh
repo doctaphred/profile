@@ -27,9 +27,6 @@ try use "/Applications/Visual Studio Code.app/Contents/Resources/app"
 
 # use /usr/local/opt/make/libexec gnubin
 
-# Prefer Homebrew openssl.
-# use "/usr/local/opt/openssl@1.1"
-
 # Systemd shell executable directory
 try use ~/.local
 
