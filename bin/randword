@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Print randomly chosen words from the BIP 0039 English word list.
+r"""randword: print randomly chosen words from the BIP 0039 English word list.
+
+Usage: randword [k [sep]]
+
+k       Number of words [default: 1]
+sep     Word separator [default: \n]
 """
 import secrets
 import sys
@@ -7,7 +12,7 @@ import sys
 
 def main(name, *args):
     if '-h' in args or '--help' in args:
-        print(__doc__)
+        print(__doc__, end='')
         raise SystemExit(0)
 
     if len(args) == 0:
@@ -20,7 +25,7 @@ def main(name, *args):
         k = int(args[0])
         sep = args[1]
     else:
-        print("Usage: randword [k] [sep]", file=sys.stderr)
+        print(__doc__, end='', file=sys.stderr)
         raise SystemExit(1)
 
     words = BIP_0039_ENGLISH.split()
