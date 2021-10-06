@@ -34,6 +34,7 @@ unuse () {
 }
 
 # macOS applications
+try use "/Applications/Sublime Text.app/Contents/SharedSupport"
 try use "/Applications/Visual Studio Code.app/Contents/Resources/app"
 
 # GNU find, locate, updatedb, and xargs
