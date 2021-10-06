@@ -34,8 +34,8 @@ unuse () {
 }
 
 # macOS applications
-try use "/Applications/Sublime Text.app/Contents/SharedSupport"
-try use "/Applications/Visual Studio Code.app/Contents/Resources/app"
+try use "/Applications/Sublime Text.app/Contents/SharedSupport"  # subl
+try use "/Applications/Visual Studio Code.app/Contents/Resources/app"  # code
 
 # GNU find, locate, updatedb, and xargs
 # use /usr/local/opt/findutils/libexec gnubin
