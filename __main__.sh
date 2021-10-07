@@ -84,6 +84,7 @@ eval "$(direnv hook bash)"
 try include "/usr/local/etc/profile.d/bash_completion.sh"
 
 # iTerm shell integration
+try include "$HOME/.iterm2_shell_integration.bash",
 try include "$PROFILE/iterm/iterm2_shell_integration.bash"
 
 # Now that we're done with setup, disable errexit so failed commands
