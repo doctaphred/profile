@@ -17,7 +17,8 @@ from pathlib import Path
 
 
 data_checksum = None  # TODO
-data_url = 'https://www.unicode.org/Public/12.1.0/ucd/UnicodeData.txt'
+# TODO: Handle updates.
+data_url = 'https://www.unicode.org/Public/14.0.0/ucd/UnicodeData.txt'
 data_file = Path(sys.path[0]) / 'UnicodeData.txt'
 
 
