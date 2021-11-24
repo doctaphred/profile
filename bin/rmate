@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This script replaces itself with the rmate executable, then runs the given command!
+
+{  # Defer execution until the matching brace.
+
+    sha256=830a590e15b2d1b89273428222736bbebcd677c5c6678c82e61bd19f256fcd2c
+    url=https://raw.githubusercontent.com/textmate/rmate/master/bin/rmate
+
+    # Save the name of this file.
+    filename=$(basename "$0")
+
+    # Log to stderr.
+    >&2 echo "$0: installing $filename from $url"
+
+    # Create a temporary working directory.
+    workdir="$(mktemp -d)"
+    pushd "$workdir"
+
+    # Download the file.
+    # -L/--location: Follow HTTP redirects.
+    curl --location "$url" >"$filename"
+
+    # Verify the integrity of the downloaded file.
+    shasum --check <<<"$sha256  $filename"
+
+    # Make it executable.
+    chmod a+x "$filename"
+
+    # Return to the original working directory.
+    popd
+
+    # Replace this script with the downloaded file.
+    mv "$workdir/$filename" "$0"
+
+    # Clean up the temporary working directory.
+    rm -rf "$workdir"
+
+    # YOLO
+    "$0" "$@"
+}
