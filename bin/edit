@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Open the best available editor.
 
-if type subl; then
+if type subl >/dev/null; then
     subl --new-window --wait "$@"
 elif type rmate; then
     rmate "$@"
