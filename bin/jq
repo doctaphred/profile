@@ -17,20 +17,25 @@ set -euo pipefail
 
     # Create a temporary working directory.
     workdir="$(mktemp -d)"
-    pushd "$workdir"
+    # Silence pushd/popd to avoid interfering with the command.
+    pushd "$workdir" >/dev/null
 
     # Download the file.
+    # -s/--silent: Don't show progress meter or error messages.
+    # -S/--show-error: Do still show error messages.
     # -L/--location: Follow HTTP redirects.
-    curl --location "$url" >"$filename"
+    curl --silent --show-error --location "$url" >"$filename"
 
     # Verify the integrity of the downloaded file.
-    shasum --check <<<"$sha256  $filename"
+    # -s/--status: Don't show error messages.
+    # -c/--check: Verify checksum (instead of calculating it).
+    shasum --status --check <<<"$sha256  $filename"
 
     # Make it executable.
     chmod a+x "$filename"
 
     # Return to the original working directory.
-    popd
+    popd >/dev/null
 
     # Replace this script with the downloaded file.
     mv "$workdir/$filename" "$0"
