@@ -26,6 +26,10 @@ You might need to upgrade bash in order to use options like `shopt -s autocd`. T
 
 Run `touch ~/.hushlogin` to disable the `Last login: <date> on ttys001` startup message.
 
+If you want to use this repo's config directory: first move any contents you
+want to keep from the existing `~/.config` directory into this repo's config
+directory, then remove `~/.config` and run `ln -s "$PROFILE/config" ~/.config`.
+
 
 ## Useful info
 
