@@ -8,8 +8,6 @@
 # (Prevents strange errors from scp et al.)
 [[ $- != *i* ]] && return
 
-type cmatrix >/dev/null 2>&1 && cmatrix -s -b -u8
-
 set -e  # Exit immediately if there's an error.
 set -o emacs  # Fails if readline is not in use.
 

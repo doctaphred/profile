@@ -47,3 +47,5 @@ alias pbr='printf 🍺'
 alias gimp='open -a GIMP-2.10.app'
 
 icloud='cd ~/"Library/Mobile Documents/com~apple~CloudDocs"'
+
+alias m='cmatrix -b -u8'
