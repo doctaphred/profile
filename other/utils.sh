@@ -103,3 +103,8 @@ rehist() {
     history -c  # Clear this session's history
     history -r  # Read history from file
 }
+
+ensure-aws-creds() {
+    # Run gimme-aws-creds only if needed.
+    aws --no-cli-pager sts get-caller-identity || gimme-aws-creds
+}
